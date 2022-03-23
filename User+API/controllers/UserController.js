@@ -18,7 +18,7 @@ class UserController{
         var user = await User.findById(id);
         if(user == undefined){
             res.status(404);
-            res.json({});
+            res.json({err: "Não achou"})
         }else{
             res.status(200)
             res.json(user);

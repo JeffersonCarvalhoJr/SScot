@@ -1,7 +1,11 @@
 class HomeController{
 
     async index(req, res){
-        res.send("Home");
+        res.send("Rodando");
+    }
+
+    async validate(req, res){
+        res.send("okay");
     }
 
 }

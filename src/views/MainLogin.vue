@@ -1,5 +1,5 @@
 <template>
-<section class="vh-100" style="background-color: black;">
+<section class="vh-100" style="background-color: #212529;">
   <div class="mask d-flex align-items-center h-100 gradient-custom-3">
     <div class="container h-100">
       <div class="row d-flex justify-content-center align-items-center h-100">
@@ -21,7 +21,7 @@
                   <label class="form-label" for="form3Example4cg">Senha</label>
                 </div>
                 <div class="d-flex justify-content-center">
-                  <button type="button" @click="register" class="btn btn-primary">Login</button>
+                  <button type="button" @click="login" class="btn btn-primary">Login</button>
                 </div>
 
                 <p class="text-center text-muted mt-5 mb-0">Esqueceu sua senha? <a href="?" class="fw-bold text-body"><u>Clique aqui</u></a></p>

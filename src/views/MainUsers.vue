@@ -1,6 +1,7 @@
 <template>
     <div>
         <h1>Painel Adm!</h1>
+        
 
         <table class="table">
         <thead>
@@ -17,7 +18,7 @@
                 <td>{{user.email}}</td>
                 <td>{{ user.role | processRole }}</td>
                 <td>
-                    <router-link :to="{name: 'UserEdit', params:{id: user.id}}"><button class="button is-success">Editar</button></router-link> | 
+                    <router-link :to="{name: 'MainUserEdit', params:{id: user.id}}"><button class="button is-success">Editar</button></router-link> | 
                     <button class="button is-danger" @click="showModalUser(user.id)">Deletar</button></td>
             </tr>
         </tbody>
@@ -109,7 +110,7 @@ export default {
     filters: {
         processRole: function(value){
             if(value == 0){
-                return "Usuário comum";
+                return "Usuário";
             }else if(value == 1){
                 return "Admin"
             }
@@ -118,6 +119,3 @@ export default {
 }
 </script>
 
-<style scoped>
-
-</style>

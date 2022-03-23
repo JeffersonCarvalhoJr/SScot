@@ -8,6 +8,7 @@ import axios from 'axios';
 import Edit from '../views/MainEdit.vue'
 
 
+
 function AdminAuth(to, from, next){
   if(localStorage.getItem('token') != undefined){
 
@@ -19,9 +20,10 @@ function AdminAuth(to, from, next){
 
     axios.post("http://localhost:8686/validate",{},req).then(res => {
       console.log(res);
-      next();
+       next();
     }).catch(err => {
       console.log(err.response);
+      console.log(req);
       next("/login");
     });
   }else{
