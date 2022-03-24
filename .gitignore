@@ -2,7 +2,6 @@
 node_modules
 /dist
 
-/User+API
 
 # local env files
 .env.local
