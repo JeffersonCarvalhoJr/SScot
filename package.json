@@ -3,12 +3,6 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-<<<<<<< HEAD
-    "postinstall": "npm run build",
-    "start": "node server.js",
-    "install:clean": "rm -rf node_modules/ && rm -rf package-lock.json && npm install && npm run dev",
-=======
->>>>>>> parent of c3cc1c2 (Ajustando start heroku)
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
     "lint": "vue-cli-service lint"
