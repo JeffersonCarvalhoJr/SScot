@@ -6,7 +6,7 @@ class User{
 
     async findAll(){
         try{
-            var result = await knex.select(["id","email","role","name"]).table("users");
+            var result = await knex.select(["id","email","role","name","created_at"]).table("users");
             return result;
         }catch(err){
             console.log(err);
@@ -16,7 +16,7 @@ class User{
 
     async findById(id){
         try{
-            var result = await knex.select(["id","email","role","name"]).where({id:id}).table("users");
+            var result = await knex.select(["id","email","role","name","created_at"]).where({id:id}).table("users");
             
             if(result.length > 0){
                 return result[0];
@@ -32,7 +32,7 @@ class User{
 
     async findByEmail(email){
         try{
-            var result = await knex.select(["id","email","password","role","name"]).where({email:email}).table("users");
+            var result = await knex.select(["id","email","password","role","name","created_at"]).where({email:email}).table("users");
             
             if(result.length > 0){
                 return result[0];

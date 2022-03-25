@@ -1,121 +1,128 @@
 <template>
-    <div>
-        <h1>Painel Adm!</h1>
-        
+  <div class="w-85 p-4">
+    <br />
+    <h2>Manutenção de Usuários</h2>
+    <br />
+    <table class="table table-bordered">
+      <thead class="table table-dark">
+        <tr>
+          <th scope="col">Nome de Usuário</th>
+          <th scope="col">E-mail Cadastro</th>
+          <th scope="col">Permissão</th>
+          <th scope="col">Data de Cadastro</th>
+          <th scope="col">Ações</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr v-for="user in users" :key="user.id">
+          <td>{{ user.name }}</td>
+          <td>{{ user.email }}</td>
+          <td>{{ user.role | processRole }}</td>
+          <td>{{ user.created_at }}</td>
+          <td>
+            <router-link
+              :to="{ name: 'MainUserEdit', params: { id: user.id } }"
+            >
+              <button class="btn btn-warning">Editar</button></router-link
+            >
+            |
+            <button class="btn btn-danger" @click="showModalUser(user.id)">
+              Deletar
+            </button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
 
-        <table class="table">
-        <thead>
-            <tr>
-            <th>Nome</th>
-            <th>E-mail</th>
-            <th>Cargo</th>
-            <th>Ações</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr v-for="user in users" :key="user.id">
-                <td>{{user.name}}</td>
-                <td>{{user.email}}</td>
-                <td>{{ user.role | processRole }}</td>
-                <td>
-                    <router-link :to="{name: 'MainUserEdit', params:{id: user.id}}"><button class="button is-success">Editar</button></router-link> | 
-                    <button class="button is-danger" @click="showModalUser(user.id)">Deletar</button></td>
-            </tr>
-        </tbody>
-        </table>
-
-
-        <div :class="{modal: true, 'is-active': showModal}">
-            <div class="modal-background"></div>
-            <div class="modal-content">
-                
-                <div class="card">
-                <header class="card-header">
-                    <p class="card-header-title">
-                    Você quer realmente deletar este usuário?
-                    </p>
-                </header>
-                <div class="card-content">
-                    <div class="content">
-                        <p>BLA BLA BLA!</p>
-                    </div>
-                </div>
-                <footer class="card-footer">
-                    <a href="#" class="card-footer-item" @click="hideModal()">Cancelar</a>
-                    <a href="#" class="card-footer-item" @click="deleteUser()">Sim, quero deletar!</a>
-                </footer>
-                </div>
-
-            </div>
-            <button class="modal-close is-large" aria-label="close" @click="hideModal()"></button>
-        </div>
-
-
-    </div>    
+    <b-modal ref="my-modal" hide-footer title="Exclusão de Cadastro de Usuário">
+      <div class="d-block text-center">
+        <h4>Você deseja realmente deseja excluir este cadastro?</h4>
+      </div>
+        <div style="display: flex; justify-content: flex-end">
+      <b-button
+        class="mt-2"
+        variant="btn btn-danger"
+        @click="deleteUser()"
+        >Sim</b-button></div>
+    </b-modal>    
+  </div>
 </template>
 
 <script>
-import axios from 'axios';
+import axios from "axios";
 export default {
-    created(){
+  created() {
+    var req = {
+      headers: {
+        Authorization: "Bearer " + localStorage.getItem("token"),
+      },
+    };
 
-        var req = {
-            headers: {
-                Authorization: "Bearer " + localStorage.getItem('token')
-            }
-        }
-
-        axios.get("http://localhost:8686/user",req).then(res => {
-            console.log(res);
-            this.users = res.data;
-        }).catch(err => {
-            console.log(err);
+    axios
+      .get("http://localhost:8686/user", req)
+      .then((res) => {
+        console.log(res);
+        console.log(this.users);
+        this.users = res.data;
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  },
+  data() {
+    return {
+      users: [],
+      modalShow: false,
+      deleteUserId: -1,
+    };
+  },
+  methods: {
+    hideModal() {
+      this.showModal = false;
+      this.$refs['my-modal'].hide()
+    },
+    showModalUser(id) {
+      this.$refs["my-modal"].show();
+      this.deleteUserId = id;
+      this.modalShow = true;
+    },
+    deleteUser() {
+      var req = {
+        headers: {
+          Authorization: "Bearer " + localStorage.getItem("token"),
+        },
+      };
+      axios
+        .delete("http://localhost:8686/user/" + this.deleteUserId, req)
+        .then((res) => {
+          console.log(res);
+         this.$refs['my-modal'].hide()
+          this.users = this.users.filter((u) => u.id != this.deleteUserId);
         })
-        console.log("OLÁ");
+        .catch((err) => {
+          console.log(err);
+          this.$refs['my-modal'].hide()
+        });
     },
-    data()
-    {
-        return {
-            users: [],
-            showModal: false,
-            deleteUserId: -1
-        }
+  },
+  filters: {
+    processRole: function (value) {
+      if (value == 0) {
+        return "Usuário";
+      } else if (value == 1) {
+        return "Comprador";
+      } else if (value == 2) {
+        return "Gestor de Compras";
+      }
     },
-    methods: {
-        hideModal(){
-            this.showModal = false;
-        },
-        showModalUser(id){
-            this.deleteUserId = id;
-            this.showModal = true;
-        },
-        deleteUser(){
-
-            var req = {
-                headers: {
-                    Authorization: "Bearer " + localStorage.getItem('token')
-                }
-            }
-
-            axios.delete("http://localhost:8686/user/"+this.deleteUserId, req).then(res => {
-                console.log(res);
-                this.showModal = false;
-                this.users = this.users.filter(u => u.id != this.deleteUserId);
-            }).catch(err => {
-                console.log(err);
-                this.showModal = false;
-            });
-        }
-    },
-    filters: {
-        processRole: function(value){
-            if(value == 0){
-                return "Usuário";
-            }else if(value == 1){
-                return "Admin"
-            }
-        }
-    }
-}
+  },
+};
 </script>
+
+<style scoped>
+td {
+  justify-content: center;
+  align-items: center;
+}
+</style>
 
