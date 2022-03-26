@@ -26,25 +26,54 @@
               <button class="btn btn-warning">Editar</button></router-link
             >
             |
-            <button class="btn btn-danger" @click="showModalUser(user.id)">
+            <button
+              class="btn btn-danger"
+              @click="showModalUserDelete(user.id)"
+            >
               Deletar
             </button>
+            |
+            <b-button @click="showModalUserRole(user.id)"> Alçada </b-button>
           </td>
         </tr>
       </tbody>
     </table>
 
-    <b-modal ref="my-modal" hide-footer title="Exclusão de Cadastro de Usuário">
+    <b-modal
+      ref="my-modaldelete"
+      hide-footer
+      title="Exclusão de Cadastro de Usuário"
+    >
       <div class="d-block text-center">
         <h4>Você deseja realmente deseja excluir este cadastro?</h4>
+      
+      <b-row class="mb-1">
+        <b-col>
+          <b-button class="mt-2" variant="btn btn-danger" @click="deleteUser()"
+            >Sim</b-button>          
+        </b-col>
+      </b-row>
       </div>
-        <div style="display: flex; justify-content: flex-end">
-      <b-button
-        class="mt-2"
-        variant="btn btn-danger"
-        @click="deleteUser()"
-        >Sim</b-button></div>
-    </b-modal>    
+    </b-modal>
+
+    <b-modal ref="my-modalrole" hide-footer title="Alterar Alçada">
+      <div class="d-block text-center">
+        <h4>Escolha a alçada desse usuário:</h4>
+
+        <b-row class="mb-1">
+          <b-col>
+            <b-form-select
+              v-model="headerBgVariant"
+              :options="role"
+            ></b-form-select>
+            <br />
+            <b-button class="mt-2" variant="primary" @click="changeRole()"
+              >Salvar</b-button
+            >
+          </b-col>
+        </b-row>
+      </div>
+    </b-modal>
   </div>
 </template>
 
@@ -72,6 +101,7 @@ export default {
   data() {
     return {
       users: [],
+      role: ["Comprador", "Gestor de Compra"],
       modalShow: false,
       deleteUserId: -1,
     };
@@ -79,10 +109,10 @@ export default {
   methods: {
     hideModal() {
       this.showModal = false;
-      this.$refs['my-modal'].hide()
+      this.$refs["my-modaldelete"].hide();
     },
-    showModalUser(id) {
-      this.$refs["my-modal"].show();
+    showModalUserDelete(id) {
+      this.$refs["my-modaldelete"].show();
       this.deleteUserId = id;
       this.modalShow = true;
     },
@@ -96,12 +126,35 @@ export default {
         .delete("http://localhost:8686/user/" + this.deleteUserId, req)
         .then((res) => {
           console.log(res);
-         this.$refs['my-modal'].hide()
+          this.$refs["my-modaldelete"].hide();
           this.users = this.users.filter((u) => u.id != this.deleteUserId);
         })
         .catch((err) => {
           console.log(err);
-          this.$refs['my-modal'].hide()
+          this.$refs["my-modaldelete"].hide();
+        });
+    },
+    showModalUserRole(id) {
+      this.$refs["my-modalrole"].show();
+      this.changeRoleUserId = id;
+      this.modalShow = true;
+    },
+    changeRole() {
+      var req = {
+        headers: {
+          Authorization: "Bearer " + localStorage.getItem("token"),
+        },
+      };
+      axios
+        .put("http://localhost:8686/user/" + this.changeRoleUserId, req)
+        .then((res) => {
+          console.log(res);
+          this.$refs["my-modalrole"].hide();
+          this.users = this.users.filter((u) => u.id != this.deleteUserId);
+        })
+        .catch((err) => {
+          console.log(err);
+          this.$refs["my-modalrole"].hide();
         });
     },
   },

@@ -11,7 +11,7 @@ module.exports = function(req, res, next){
         try{
             var decoded = jwt.verify(token,secret);
             
-            if(decoded.role == 1){
+            if(decoded.role == 2){
                 next();
             }else{
                 res.status(403);
