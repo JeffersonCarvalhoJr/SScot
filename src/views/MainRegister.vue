@@ -56,7 +56,7 @@ export default {
     },
     methods: {
         register(){
-            axios.post("http://localhost:8686/user",{
+            axios.post("https://apiuserssscot.herokuapp.com/user",{
                 name: this.name,
                 password: this.password,
                 email: this.email

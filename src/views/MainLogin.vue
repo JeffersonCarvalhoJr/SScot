@@ -49,7 +49,7 @@ export default {
     },
     methods: {
         login(){
-            axios.post("http://localhost:8686/login",{
+            axios.post("https://apiuserssscot.herokuapp.com/login",{
                 password: this.password,
                 email: this.email
             }).then(res => {

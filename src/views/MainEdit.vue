@@ -33,7 +33,7 @@ export default {
             }
         }
 
-        axios.get("http://localhost:8686/user/" + this.$route.params.id, req).then(res => {
+        axios.get("https://apiuserssscot.herokuapp.com/user/" + this.$route.params.id, req).then(res => {
             console.log(res);
 
             this.name = res.data.name;
@@ -64,7 +64,7 @@ export default {
             }
 
 
-            axios.put("http://localhost:8686/user",{
+            axios.put("https://apiuserssscot.herokuapp.com/user",{
                 name: this.name,
                 email: this.email,
                 id: this.id
