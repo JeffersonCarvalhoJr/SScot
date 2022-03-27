@@ -146,9 +146,9 @@ export default {
         },
       };
       axios
-        .put("https://apiuserssscot.herokuapp.com/user/",{
-                id: this.id,
-                role:this.NewRole
+        .put("https://apiuserssscot.herokuapp.com/user/" + this.changeRoleUserId,{
+            role: this.NewRole
+            
             }, req).then(res => {
                 console.log(res);
                 this.$router.push({name: 'Users'});
