@@ -13,6 +13,6 @@ app.use(cors());
 
 app.use("/",router);
 
-app.listen(8686,() => {
+app.listen(process.env.PORT || 5000,() => {
     console.log("Servidor rodando")
 });
