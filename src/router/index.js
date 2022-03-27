@@ -18,7 +18,7 @@ function AdminAuth(to, from, next){
       }
     }
 
-    axios.post("http://localhost:8686/validate",{},req).then(res => {
+    axios.post("https://apiuserssscot.herokuapp.com/validate",{},req).then(res => {
       console.log(res);
        next();
     }).catch(err => {
