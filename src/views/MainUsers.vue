@@ -63,7 +63,7 @@
         <b-row class="mb-1">
           <b-col>
             <b-form-select
-              v-model="headerBgVariant"
+              v-model="newRole"
               :options="role"
             ></b-form-select>
             <br />
@@ -102,6 +102,7 @@ export default {
     return {
       users: [],
       role: ["Comprador", "Gestor de Compra"],
+      newRole: '1',
       modalShow: false,
       deleteUserId: -1,
     };
@@ -114,7 +115,6 @@ export default {
     showModalUserDelete(id) {
       this.$refs["my-modaldelete"].show();
       this.deleteUserId = id;
-      this.modalShow = true;
     },
     deleteUser() {
       var req = {
@@ -137,7 +137,6 @@ export default {
     showModalUserRole(id) {
       this.$refs["my-modalrole"].show();
       this.changeRoleUserId = id;
-      this.modalShow = true;
     },
     changeRole() {
       var req = {
@@ -146,17 +145,16 @@ export default {
         },
       };
       axios
-        .put("http://localhost:8686/user/" + this.changeRoleUserId, req)
-        .then((res) => {
-          console.log(res);
-          this.$refs["my-modalrole"].hide();
-          this.users = this.users.filter((u) => u.id != this.deleteUserId);
-        })
-        .catch((err) => {
-          console.log(err);
-          this.$refs["my-modalrole"].hide();
-        });
-    },
+        .put("http://localhost:8686/user/",{
+                id: this.id
+            }, req).then(res => {
+                console.log(res);
+                this.$router.push({name: 'Users'});
+            }).catch(err => {
+                var msgErro = err.response.data.err;
+                this.error = msgErro;
+            })
+        }
   },
   filters: {
     processRole: function (value) {
