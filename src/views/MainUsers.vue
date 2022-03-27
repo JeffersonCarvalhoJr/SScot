@@ -88,7 +88,7 @@ export default {
     };
 
     axios
-      .get("http://localhost:8686/user", req)
+      .get("https://apiuserssscot.herokuapp.com/user", req)
       .then((res) => {
         console.log(res);
         console.log(this.users);
@@ -123,7 +123,7 @@ export default {
         },
       };
       axios
-        .delete("http://localhost:8686/user/" + this.deleteUserId, req)
+        .delete("https://apiuserssscot.herokuapp.com/user/" + this.deleteUserId, req)
         .then((res) => {
           console.log(res);
           this.$refs["my-modaldelete"].hide();
@@ -145,7 +145,7 @@ export default {
         },
       };
       axios
-        .put("http://localhost:8686/user/",{
+        .put("https://apiuserssscot.herokuapp.com/user/",{
                 id: this.id
             }, req).then(res => {
                 console.log(res);

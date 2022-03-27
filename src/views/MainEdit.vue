@@ -33,7 +33,7 @@ export default {
             }
         }
 
-        axios.get("https://apiuserssscot.herokuapp.com/user/" + this.$route.params.id, req).then(res => {
+        axios.get("http://localhost:8686/user/" + this.$route.params.id, req).then(res => {
             console.log(res);
 
             this.name = res.data.name;
