@@ -101,8 +101,9 @@ export default {
   data() {
     return {
       users: [],
-      role: ["Comprador", "Gestor de Compra"],
-      newRole: '1',
+      // role: ["Comprador", "Gestor de Compra"],
+      role: ["1", "2"],
+      NewRole: '',
       modalShow: false,
       deleteUserId: -1,
     };
@@ -146,7 +147,8 @@ export default {
       };
       axios
         .put("https://apiuserssscot.herokuapp.com/user/",{
-                id: this.id
+                id: this.id,
+                role:this.NewRole
             }, req).then(res => {
                 console.log(res);
                 this.$router.push({name: 'Users'});
