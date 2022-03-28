@@ -62,13 +62,16 @@
 
         <b-row class="mb-1">
           <b-col>
-            <b-form-select
-              v-model="newRole"
-              :options="role"
-            ></b-form-select>
-            <br />
-            <b-button class="mt-2" variant="primary" @click="changeRole()"
-              >Salvar</b-button
+            <b-button class="changerole" variant="primary" @click="changeRoleUser()"
+              >Usuário</b-button
+            >
+            |
+           <b-button class="changerole" variant="primary" @click="changeRoleBuyer()"
+              >Comprador</b-button
+            >
+            |
+            <b-button class="changerole" variant="primary" @click="changeRoleManager()"
+              >Gestor de Compras</b-button
             >
           </b-col>
         </b-row>
@@ -101,13 +104,11 @@ export default {
   data() {
     return {
       users: [],
-      // role: ["Comprador", "Gestor de Compra"],
-      role: ["1", "2"],
-      NewRole: '',
       modalShow: false,
       deleteUserId: -1,
     };
-  },
+   },
+
   methods: {
     hideModal() {
       this.showModal = false;
@@ -139,19 +140,64 @@ export default {
       this.$refs["my-modalrole"].show();
       this.changeRoleUserId = id;
     },
-    changeRole() {
+
+
+    changeRoleUser() {
+      console.log(this.newRole)
       var req = {
         headers: {
           Authorization: "Bearer " + localStorage.getItem("token"),
         },
       };
       axios
-        .put("https://apiuserssscot.herokuapp.com/user/" + this.changeRoleUserId,{
-            role: this.NewRole
-            
+        .put("https://apiuserssscot.herokuapp.com/user/",{
+            role: "0",
+            id: this.changeRoleUserId
             }, req).then(res => {
                 console.log(res);
-                this.$router.push({name: 'Users'});
+                location.reload();
+                this.$refs["my-modalrole"].hide();
+            }).catch(err => {
+                var msgErro = err.response.data.err;
+                this.error = msgErro;
+            })
+        },
+
+    changeRoleBuyer() {
+      console.log(this.newRole)
+      var req = {
+        headers: {
+          Authorization: "Bearer " + localStorage.getItem("token"),
+        },
+      };
+      axios
+        .put("https://apiuserssscot.herokuapp.com/user/",{
+            role: "1",
+            id: this.changeRoleUserId
+            }, req).then(res => {
+                console.log(res);
+                location.reload();
+                this.$refs["my-modalrole"].hide();
+            }).catch(err => {
+                var msgErro = err.response.data.err;
+                this.error = msgErro;
+            })
+        },
+      changeRoleManager() {
+      console.log(this.newRole)
+      var req = {
+        headers: {
+          Authorization: "Bearer " + localStorage.getItem("token"),
+        },
+      };
+      axios
+        .put("https://apiuserssscot.herokuapp.com/user/",{
+            role: "2",
+            id: this.changeRoleUserId
+            }, req).then(res => {
+                console.log(res);
+                location.reload();
+                this.$refs["my-modalrole"].hide();
             }).catch(err => {
                 var msgErro = err.response.data.err;
                 this.error = msgErro;
@@ -177,5 +223,7 @@ td {
   justify-content: center;
   align-items: center;
 }
+
+
 </style>
 
