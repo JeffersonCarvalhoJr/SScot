@@ -1,5 +1,6 @@
 <template>
-  <div class="w-85 p-4">
+  <div>
+    <b-container fluid>
     <br />
     <h2>Manutenção de Usuários</h2>
     <br />
@@ -23,17 +24,17 @@
             <router-link
               :to="{ name: 'MainUserEdit', params: { id: user.id } }"
             >
-              <button class="btn btn-warning">Editar</button></router-link
+              <button style='margin-right:10px' class="btn btn-warning">Editar</button></router-link
             >
-            |
-            <button
+             
+            <button style='margin-right:10px'
               class="btn btn-danger"
               @click="showModalUserDelete(user.id)"
             >
               Deletar
             </button>
-            |
-            <b-button @click="showModalUserRole(user.id)"> Alçada </b-button>
+             
+            <b-button style='margin-right:10px' @click="showModalUserRole(user.id)"> Alçada </b-button>
           </td>
         </tr>
       </tbody>
@@ -47,7 +48,7 @@
       <div class="d-block text-center">
         <h4>Você deseja realmente deseja excluir este cadastro?</h4>
       
-      <b-row class="mb-1">
+      <b-row class="mb-2">
         <b-col>
           <b-button class="mt-2" variant="btn btn-danger" @click="deleteUser()"
             >Sim</b-button>          
@@ -77,6 +78,7 @@
         </b-row>
       </div>
     </b-modal>
+    </b-container>
   </div>
 </template>
 

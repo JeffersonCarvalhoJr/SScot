@@ -3,9 +3,10 @@ import VueRouter from 'vue-router'
 import Home from '../views/MainHome.vue'
 import Register from '../views/MainRegister.vue'
 import Login from '../views/MainLogin.vue'
-import Users from '../views/MainUsers.vue'
+import Users from '../views/manager/MainUsers.vue'
 import axios from 'axios';
-import Edit from '../views/MainEdit.vue'
+import Edit from '../views/manager/MainEdit.vue'
+import HomeModules from '../views/HomeModules.vue'
 
 
 
@@ -52,7 +53,7 @@ Vue.use(VueRouter)
   },
   {
     path: '/admin/users',
-    name: 'MainUsers',
+    name: 'np',
     component: Users,
     beforeEnter: AdminAuth
   },
@@ -60,6 +61,12 @@ Vue.use(VueRouter)
     path: '/admin/users/edit/:id',
     name: 'MainUserEdit',
     component: Edit,
+    beforeEnter: AdminAuth
+  },
+  {
+    path: '/home',
+    name: 'HomeModules',
+    component: HomeModules,
     beforeEnter: AdminAuth
   },
 ]
