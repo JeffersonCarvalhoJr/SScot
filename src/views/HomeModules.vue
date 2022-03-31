@@ -93,15 +93,41 @@
       </b-row>
       <b-button variant="primary">Nova Cotação Rápida</b-button>
     </b-container>
+      <br>
+      <h4> {{ name }}</h4>
+     <h4> {{ role | processRole }}</h4>
   </div>
-</section>
+ </section>
 </template>
 
 <script>
-export default {};
+export default {
+    data() {
+    return {
+      users:[],
+      name: localStorage.getItem("name"),
+      role: localStorage.getItem("role"),
+    };
+   },
+     filters: {
+    processRole: function (value) {
+      if (value == 0) {
+        return "Usuário";
+      } else if (value == 1) {
+        return "Comprador";
+      } else if (value == 2) {
+        return "Gestor de Compras";
+      }
+    },
+  },
+};
 </script>
 
 <style scoped>
+h4 {
+  color: white;
+}
+
 h2 {
   color: white;
 }

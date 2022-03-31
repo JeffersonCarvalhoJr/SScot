@@ -55,6 +55,9 @@ export default {
             }).then(res => {
                 console.log(res);
                 localStorage.setItem('token',res.data.token);
+                localStorage.setItem('id',res.data.id);
+                localStorage.setItem('name',res.data.name);
+                localStorage.setItem('role',res.data.role);
                 this.$router.push({name: 'HomeModules'});
             }).catch(err => {
                 var msgErro = err.response.data.err;

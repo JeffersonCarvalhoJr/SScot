@@ -67,7 +67,6 @@ Vue.use(VueRouter)
     path: '/home',
     name: 'HomeModules',
     component: HomeModules,
-    beforeEnter: AdminAuth
   },
 ]
 
