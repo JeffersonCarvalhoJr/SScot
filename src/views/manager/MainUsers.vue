@@ -93,7 +93,7 @@ export default {
     };
 
     axios
-      .get("https://apiuserssscot.herokuapp.com/user", req)
+      .get("https://apiuserssscot.herokuapp.com/admin", req)
       .then((res) => {
         console.log(res);
         console.log(this.users);
@@ -127,7 +127,7 @@ export default {
         },
       };
       axios
-        .delete("https://apiuserssscot.herokuapp.com/user/" + this.deleteUserId, req)
+        .delete("https://apiuserssscot.herokuapp.com/admin/" + this.deleteUserId, req)
         .then((res) => {
           console.log(res);
           this.$refs["my-modaldelete"].hide();
@@ -152,7 +152,7 @@ export default {
         },
       };
       axios
-        .put("https://apiuserssscot.herokuapp.com/user/",{
+        .put("https://apiuserssscot.herokuapp.com/admin/",{
             role: "0",
             id: this.changeRoleUserId
             }, req).then(res => {
@@ -173,7 +173,7 @@ export default {
         },
       };
       axios
-        .put("https://apiuserssscot.herokuapp.com/user/",{
+        .put("https://apiuserssscot.herokuapp.com/admin/",{
             role: "1",
             id: this.changeRoleUserId
             }, req).then(res => {
@@ -193,7 +193,7 @@ export default {
         },
       };
       axios
-        .put("https://apiuserssscot.herokuapp.com/user/",{
+        .put("https://apiuserssscot.herokuapp.com/admin/",{
             role: "2",
             id: this.changeRoleUserId
             }, req).then(res => {

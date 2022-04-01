@@ -7,6 +7,7 @@ import Users from '../views/manager/MainUsers.vue'
 import axios from 'axios';
 import Edit from '../views/manager/MainEdit.vue'
 import HomeModules from '../views/HomeModules.vue'
+import UserEdit from '../views/user/UserEdit.vue'
 
 
 
@@ -68,6 +69,12 @@ Vue.use(VueRouter)
     name: 'HomeModules',
     component: HomeModules,
   },
+  {
+    path: '/users/edit/:id',
+    name: 'UserEdit',
+    component: UserEdit,
+  },
+  
 ]
 
 const router = new VueRouter({

@@ -1,12 +1,10 @@
 <template>
   <b-navbar type="navbar navbar-dark bg-dark">
     <b-navbar-nav>
-      <b-nav-item v-if="message == 'null'" href="/">Página Inicial</b-nav-item>
-      <b-nav-item v-if="message == 'null'" href="/login">Login</b-nav-item>
-      <b-nav-item v-if="message == 'null'" href="/register">Registro</b-nav-item>
-      <b-nav-item v-if="message != 'null'" href="/admin/users">Usuários</b-nav-item>
-      <b-nav-item v-if="message != 'null'" href="/home">Módulos</b-nav-item>
-      <b-nav-item v-if="message != 'null'" @click="handleLogout" href="/login"
+      <b-nav-item href="/">Página Inicial</b-nav-item>
+      <b-nav-item href="/admin/users">Usuários</b-nav-item>
+      <b-nav-item href="/home">Módulos</b-nav-item>
+      <b-nav-item v-if="message != 'null'" @click="handleLogout"
         >Sair</b-nav-item
       >
     </b-navbar-nav>
@@ -24,12 +22,13 @@ export default {
     name: "NavBar",
     data(){
         return {
-          message: localStorage.getItem("token")
+        message: localStorage.getItem("token"),
     }
     },
   methods: {
     handleLogout() {
       localStorage.setItem("token", "null");
+      this.$router.push({name: 'MainHome'});
     },
   },
 };
