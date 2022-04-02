@@ -113,7 +113,7 @@ export default {
     
     findbycnpj() {
       axios
-        .get("http://localhost:8080/v1/cnpj/" + "97755177000130")
+        .get("https://receitaws.com.br/v1/cnpj/" + "97755177000130")
         .then((response) => {
           (this.info = response)
           console.log(response.data);
