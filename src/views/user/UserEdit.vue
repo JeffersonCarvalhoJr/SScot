@@ -6,34 +6,43 @@
           <div class="col-12 col-md-9 col-lg-7 col-xl-6">
             <div class="card" style="border-radius: 15px">
               <div class="card-body p-5">
-        <br />
-        <h2>SSCot - Sistema de Cotações</h2>
-        <h4>Gestão de Usuário</h4>
-        <hr>
-    <div fluid="sm">
-      <h6>Nome de Usuário</h6>
-      <b-form-group>
-        <b-form-input
-          id="input-1"
-          v-model="name"
-          :disabled="true"
-        ></b-form-input>
-      </b-form-group>
-      <br />
-      <h6>Email</h6>
-      <b-form-group>
-        <b-form-input
-          id="input-2"
-          v-model="email"
-          :disabled="true"
-        ></b-form-input>
-      </b-form-group>
-      <br /><br /><br />
-      <h6>Solicitar Representada - Insira o CNPJ</h6>
-      <b-form-input v-model="cnpj" v-mask="'##.###.###/####-##'"></b-form-input>
-      <br />
-      <b-button variant="success">Solicitar agora!</b-button>
-    </div></div></div></div></div></div></div>
+                <br />
+                <h2>SSCot - Sistema de Cotações</h2>
+                <h4>Gestão de Usuário</h4>
+                <hr />
+                <div fluid="sm">
+                  <h6>Nome de Usuário</h6>
+                  <b-form-group>
+                    <b-form-input
+                      id="input-1"
+                      v-model="name"
+                      :disabled="true"
+                    ></b-form-input>
+                  </b-form-group>
+                  <br />
+                  <h6>Email</h6>
+                  <b-form-group>
+                    <b-form-input
+                      id="input-2"
+                      v-model="email"
+                      :disabled="true"
+                    ></b-form-input>
+                  </b-form-group>
+                  <br /><br /><br />
+                  <h6>Solicitar Representada - Insira o CNPJ</h6>
+                  <b-form-input
+                    v-model="cnpj"
+                    v-mask="'##.###.###/####-##'"
+                  ></b-form-input>
+                  <br />
+                  <b-button @click="findbycnpj" variant="success">Solicitar agora!</b-button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
   </section>
 </template>
 
@@ -70,6 +79,7 @@ export default {
       id: -1,
       error: undefined,
       cnpj: "",
+      info:""
     };
   },
   methods: {
@@ -98,6 +108,18 @@ export default {
           this.error = msgErro;
         });
     },
+    
+
+    
+    findbycnpj() {
+      axios
+        .get("http://localhost:8080/v1/cnpj/" + "97755177000130")
+        .then((response) => {
+          (this.info = response)
+          console.log(response.data);
+        });
+        
+    }
   },
 };
 </script>
@@ -114,6 +136,4 @@ h2 {
 h6 {
   color: black;
 }
-
-
 </style>
