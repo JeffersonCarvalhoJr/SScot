@@ -1,11 +1,14 @@
 <template>
-  <div>
-    <b-container fluid>
-    <br />
+<section class="vh-100" style="background-color: #212529">
+    <div class="mask d-flex align-items-center h-100 gradient-custom-3">
+      <div class="container h-100">
+        <div class="row d-flex justify-content-center align-items-top h-100">
+          <div class="w-100 p-3">
+    <br/>
     <h2>Manutenção de Usuários</h2>
     <br />
     <table class="table table-bordered">
-      <thead class="table table-dark">
+      <thead class="table table-light">
         <tr>
           <th scope="col">Nome de Usuário</th>
           <th scope="col">E-mail Cadastro</th>
@@ -15,7 +18,7 @@
         </tr>
       </thead>
       <tbody>
-        <tr v-for="user in users" :key="user.id">
+        <tr v-for="user in users" :key="user.id" class="table-light">
           <td>{{ user.name }}</td>
           <td>{{ user.email }}</td>
           <td>{{ user.role | processRole }}</td>
@@ -78,8 +81,8 @@
         </b-row>
       </div>
     </b-modal>
-    </b-container>
   </div>
+        </div></div></div></section>
 </template>
 
 <script>
@@ -224,6 +227,9 @@ export default {
 td {
   justify-content: center;
   align-items: center;
+}
+h2 {
+  color: white;
 }
 
 

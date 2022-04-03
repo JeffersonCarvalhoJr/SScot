@@ -35,9 +35,12 @@
                     v-mask="'##.###.###/####-##'"
                   ></b-form-input>
                   <br />
-                  <b-button @click="findbycnpj" variant="success"
-                    >Solicitar agora!</b-button
-                  >
+                  <h6>Razão Social</h6>
+                  <b-form-input
+                    v-model="razao_social"
+                  ></b-form-input>
+                  <br />
+                  <b-button variant="success">Solicitar agora!</b-button>
                 </div>
               </div>
             </div>
@@ -50,6 +53,7 @@
 
 <script>
 import axios from "axios";
+
 export default {
   created() {
     var req = {
@@ -81,7 +85,6 @@ export default {
       id: -1,
       error: undefined,
       cnpj: "",
-      suppliers: "",
     };
   },
   methods: {
@@ -111,24 +114,22 @@ export default {
         });
     },
 
-    findbycnpj() {
-      var options = {
-        method: "GET",
-        url: "https://api-publica.speedio.com.br/buscarcnpj?cnpj=97755177000130",
-        headers: { "Content-Type": "application/json" },
-      };
+    // findbycnpj() {
+    //   var options = {
+    //     method: "GET",
+    //     url: "https://receitaws.com.br/v1/cnpj/cnpj/97755177000130",
+    //     headers: { "Content-Type": "application/json" },
+    //   };
 
-      axios
-        .request(options)
-        .then(function (response) {
-          console.log(response.data);
-          this.suppliers = response.data;
-          console.log(this.suppliers);
-        })
-        .catch(function (error) {
-          console.error(error);
-        });
-    },
+    //   axios
+    //     .request(options)
+    //     .then(function (response) {
+    //      console.log(response.data);
+    //     })
+    //     .catch(function (error) {
+    //       console.error(error);
+    //     });
+    // },
   },
 };
 </script>

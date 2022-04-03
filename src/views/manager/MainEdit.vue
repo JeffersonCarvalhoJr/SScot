@@ -26,7 +26,6 @@ import axios from 'axios';
 export default {
     created(){
 
-
         var req = {
             headers: {
                 Authorization: "Bearer " + localStorage.getItem('token')
