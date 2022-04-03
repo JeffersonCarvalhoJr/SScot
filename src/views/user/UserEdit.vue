@@ -49,6 +49,8 @@
 <script>
 import axios from "axios";
 
+
+
 export default {
   created() {
     var req = {
@@ -111,9 +113,13 @@ export default {
     },
 
     findbycnpj() {
+      var cnpjtreat;
+      cnpjtreat = this.cnpj.replaceAll('/', '')
+      cnpjtreat = cnpjtreat.replaceAll('-', '')
+      cnpjtreat = cnpjtreat.replaceAll('.', '')
       const config = {
         method: "get",
-        url: "https://api.cnpja.com/office/97755177000130",
+        url: "https://api.cnpja.com/office/" + cnpjtreat ,
         headers: {
           Authorization: "df691c4f-9148-4ab7-9cdc-7c55622c1376-52756d1a-10b4-4227-98fc-eefc218f774f",
         },
@@ -121,8 +127,7 @@ export default {
 
       axios(config)
         .then(function (response) {
-          // console.log(response.data);
-           let supplier = response.data;
+          let supplier = response.data;
           console.log(supplier.alias);
         })
         .catch(function (error) {
