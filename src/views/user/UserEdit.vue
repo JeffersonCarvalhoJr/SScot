@@ -34,13 +34,8 @@
                     v-model="cnpj"
                     v-mask="'##.###.###/####-##'"
                   ></b-form-input>
-                  <br />
-                  <h6>Razão Social</h6>
-                  <b-form-input
-                    v-model="razao_social"
-                  ></b-form-input>
-                  <br />
-                  <b-button variant="success">Solicitar agora!</b-button>
+                  <br>
+                  <b-button @click="findbycnpj()" variant="success">Solicitar agora!</b-button>
                 </div>
               </div>
             </div>
@@ -85,6 +80,7 @@ export default {
       id: -1,
       error: undefined,
       cnpj: "",
+      supplier: {}
     };
   },
   methods: {
@@ -114,22 +110,25 @@ export default {
         });
     },
 
-    // findbycnpj() {
-    //   var options = {
-    //     method: "GET",
-    //     url: "https://receitaws.com.br/v1/cnpj/cnpj/97755177000130",
-    //     headers: { "Content-Type": "application/json" },
-    //   };
+    findbycnpj() {
+      const config = {
+        method: "get",
+        url: "https://api.cnpja.com/office/97755177000130",
+        headers: {
+          Authorization: "df691c4f-9148-4ab7-9cdc-7c55622c1376-52756d1a-10b4-4227-98fc-eefc218f774f",
+        },
+      };
 
-    //   axios
-    //     .request(options)
-    //     .then(function (response) {
-    //      console.log(response.data);
-    //     })
-    //     .catch(function (error) {
-    //       console.error(error);
-    //     });
-    // },
+      axios(config)
+        .then(function (response) {
+          // console.log(response.data);
+           let supplier = response.data;
+          console.log(supplier.alias);
+        })
+        .catch(function (error) {
+          console.log(error);
+        });
+    },
   },
 };
 </script>
