@@ -14,6 +14,7 @@ Vue.use(IconsPlugin)
 Vue.use(VueTheMask)
 
 
+
 Vue.config.productionTip = false
 
 new Vue({

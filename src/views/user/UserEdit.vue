@@ -35,7 +35,9 @@
                     v-mask="'##.###.###/####-##'"
                   ></b-form-input>
                   <br />
-                  <b-button @click="findbycnpj" variant="success">Solicitar agora!</b-button>
+                  <b-button @click="findbycnpj" variant="success"
+                    >Solicitar agora!</b-button
+                  >
                 </div>
               </div>
             </div>
@@ -79,7 +81,7 @@ export default {
       id: -1,
       error: undefined,
       cnpj: "",
-      info:""
+      info: "",
     };
   },
   methods: {
@@ -108,18 +110,23 @@ export default {
           this.error = msgErro;
         });
     },
-    
 
-    
     findbycnpj() {
+      var options = {
+        method: "GET",
+        url: "https://receitaws.com.br/v1/cnpj/cnpj/97755177000130",
+        headers: { "Content-Type": "application/json" },
+      };
+
       axios
-        .get("https://receitaws.com.br/v1/cnpj/" + "97755177000130")
-        .then((response) => {
-          (this.info = response)
+        .request(options)
+        .then(function (response) {
           console.log(response.data);
+        })
+        .catch(function (error) {
+          console.error(error);
         });
-        
-    }
+    },
   },
 };
 </script>
