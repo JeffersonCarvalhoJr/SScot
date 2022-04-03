@@ -81,7 +81,7 @@ export default {
       id: -1,
       error: undefined,
       cnpj: "",
-      info: "",
+      suppliers: "",
     };
   },
   methods: {
@@ -114,7 +114,7 @@ export default {
     findbycnpj() {
       var options = {
         method: "GET",
-        url: "https://receitaws.com.br/v1/cnpj/cnpj/97755177000130",
+        url: "https://api-publica.speedio.com.br/buscarcnpj?cnpj=97755177000130",
         headers: { "Content-Type": "application/json" },
       };
 
@@ -122,6 +122,8 @@ export default {
         .request(options)
         .then(function (response) {
           console.log(response.data);
+          this.suppliers = response.data;
+          console.log(this.suppliers);
         })
         .catch(function (error) {
           console.error(error);
