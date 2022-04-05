@@ -38,6 +38,7 @@
                   <b-button @click="findbycnpj()" variant="success"
                     >Solicitar agora!</b-button
                   >
+                  
                 </div>
                 <br />
                 <b-modal
@@ -50,12 +51,13 @@
 
                     <b-row class="mb-2">
                       <b-col>
-                        <b-button
+                        <b-button v-if="msgErro==''"
                           class="mt-2"
                           variant="success"
                           @click="includeCNPJ(cnpj)"
                           >Sim</b-button
                         >
+                        <h5>{{msgErro}}</h5>
                       </b-col>
                     </b-row>
                   </div>
@@ -104,6 +106,7 @@ export default {
       error: undefined,
       cnpj: "",
       supplier: "",
+      msgErro: "",
     };
   },
   methods: {
@@ -160,6 +163,7 @@ export default {
         .finally(() => (this.loading = false));
     },
     includeCNPJ(cnpj) {
+
       var req = {
         headers: {
           Authorization: "Bearer " + localStorage.getItem("token"),
@@ -179,8 +183,8 @@ export default {
           this.$router.push({ name: "HomeModules" });
         })
         .catch((err) => {
-          var msgErro = err.response.data.err;
-          this.error = msgErro;
+          this.msgErro = err.response.data.err;
+        //  this.$refs["my-modal"].hide();
         });
     }
     
@@ -197,7 +201,14 @@ h2 {
   color: black;
 }
 
+h5 {
+  color: red;
+}
+
 h6 {
   color: black;
 }
+
+
+
 </style>
