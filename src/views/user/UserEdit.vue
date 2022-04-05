@@ -53,7 +53,7 @@
                         <b-button
                           class="mt-2"
                           variant="success"
-                          @click="includeCNPJ()"
+                          @click="includeCNPJ(cnpj)"
                           >Sim</b-button
                         >
                       </b-col>
@@ -159,7 +159,7 @@ export default {
         })
         .finally(() => (this.loading = false));
     },
-    includeCNPJ() {
+    includeCNPJ(cnpj) {
       var req = {
         headers: {
           Authorization: "Bearer " + localStorage.getItem("token"),
@@ -170,13 +170,13 @@ export default {
           "https://apiuserssscot.herokuapp.com/user/cnpj",
           {
             user_id: localStorage.getItem("id"),
-            cnpj: this.cnpjtreat,
+            cnpj: cnpj,
           },
           req
         )
         .then((res) => {
           console.log(res);
-          this.$router.push({ name: "Users" });
+          this.$router.push({ name: "HomeModules" });
         })
         .catch((err) => {
           var msgErro = err.response.data.err;
