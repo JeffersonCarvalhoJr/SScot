@@ -1,8 +1,10 @@
 <template>
-<div>
-        <h6>Desenvolvido por Jefferson Carvalho Jr - Aluno FACCAT (Sistemas de Informação)</h6>
-        <h6>Formação Prevista - 2° Sem 2022</h6>
-</div>
+<footer>
+  <br>
+  <div>Desenvolvido por Jefferson Carvalho Jr - Aluno FACCAT (Sistemas de Informação)</div>
+  <div>Formação Prevista - 2° Sem 2022</div>
+
+</footer>
 </template>
 
 <script>
@@ -12,5 +14,11 @@ export default {
 </script>
 
 <style>
+
+footer{
+  background-color: var(--color-background);
+  color:white;
+  font-family: Helvetica;
+}
 
 </style>

@@ -1,5 +1,5 @@
 <template>
-<section class="vh-100" style="background-color: #212529;">
+<section class="vh-100">
   <div>
     <br />
     <h2>SSCot - Sistema de Cotações</h2>
@@ -131,4 +131,9 @@ h4 {
 h2 {
   color: white;
 }
+
+section{
+  background-color: var(--color-background)
+}
+
 </style>

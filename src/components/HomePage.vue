@@ -36,37 +36,21 @@
                     <div class="col-lg-4 mb-5 mb-lg-0">
                         <div class="feature bg-primary bg-gradient text-white rounded-3 mb-3"><i class="bi bi-collection"></i></div>
                         <h2 class="h4 fw-bolder">Transparência</h2>
-                        <!-- <p>Paragraph of text beneath the heading to explain the heading. We'll add onto it with another sentence and probably just keep going until we run out of words.</p> -->
-                        <!-- <a class="text-decoration-none" href="#!">
-                            Call to action -->
-                            <!-- <i class="bi bi-arrow-right"></i> -->
-                        <!-- </a> -->
+                        <p>Paragraph of text beneath the heading to explain the heading. We'll add onto it with another sentence and probably just keep going until we run out of words.</p>
                     </div>
                     <div class="col-lg-4 mb-5 mb-lg-0">
                         <div class="feature bg-primary bg-gradient text-white rounded-3 mb-3"><i class="bi bi-building"></i></div>
                         <h2 class="h4 fw-bolder">Agilidade</h2>
-                        <!-- <p>Paragraph of text beneath the heading to explain the heading. We'll add onto it with another sentence and probably just keep going until we run out of words.</p> -->
-                        <!-- <a class="text-decoration-none" href="#!">
-                            Call to action -->
-                            <!-- <i class="bi bi-arrow-right"></i> -->
-                        <!-- </a> -->
+                        <p>Paragraph of text beneath the heading to explain the heading. We'll add onto it with another sentence and probably just keep going until we run out of words.</p>
                     </div>
                     <div class="col-lg-4">
                         <div class="feature bg-primary bg-gradient text-white rounded-3 mb-3"><i class="bi bi-toggles2"></i></div>
                         <h2 class="h4 fw-bolder">Redução de Custo</h2>
-                        <!-- <p>Paragraph of text beneath the heading to explain the heading. We'll add onto it with another sentence and probably just keep going until we run out of words.</p>
-                        <a class="text-decoration-none" href="#!">
-                            Call to action -->
-                            <!-- <i class="bi bi-arrow-right"></i> -->
-                        <!-- </a> -->
+                        <p>Paragraph of text beneath the heading to explain the heading. We'll add onto it with another sentence and probably just keep going until we run out of words.</p>
                     </div>
                 </div>
             </div>
         </section>
-        <br>
-        <br>
-        <h6>Desenvolvido por Jefferson Carvalho Jr - Aluno FACCAT (Sistemas de Informação)</h6>
-        <h6>Formação Prevista - 2° Sem 2022</h6>
     </body>
     
   </div>

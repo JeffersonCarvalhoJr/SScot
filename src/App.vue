@@ -1,17 +1,17 @@
 <template>
   <div id="app">
      <NavBar />
-    <router-view/>
+     <router-view/>
   </div>
 </template>
 
 <script>
 import NavBar from './components/NavBar'
-
+import './styles/global.css'
 
 export default {
   components: {
-    NavBar
+    NavBar,
     
   }
 }
@@ -21,7 +21,7 @@ export default {
 
 <style>
 #app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
+  font-family: Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
