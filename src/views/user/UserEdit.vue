@@ -34,9 +34,32 @@
                     v-model="cnpj"
                     v-mask="'##.###.###/####-##'"
                   ></b-form-input>
-                  <br>
-                  <b-button @click="findbycnpj()" variant="success">Solicitar agora!</b-button>
+                  <br />
+                  <b-button @click="findbycnpj()" variant="success"
+                    >Solicitar agora!</b-button
+                  >
                 </div>
+                <br />
+                <b-modal
+                  ref="my-modal"
+                  hide-footer
+                  title="Nova Representada"
+                >
+                  <div class="d-block text-center">
+                    <h4>Você deseja solicitar a representada de {{ supplier }}?</h4>
+
+                    <b-row class="mb-2">
+                      <b-col>
+                        <b-button
+                          class="mt-2"
+                          variant="success"
+                          @click="includeCNPJ()"
+                          >Sim</b-button
+                        >
+                      </b-col>
+                    </b-row>
+                  </div>
+                </b-modal>
               </div>
             </div>
           </div>
@@ -48,8 +71,6 @@
 
 <script>
 import axios from "axios";
-
-
 
 export default {
   created() {
@@ -82,7 +103,7 @@ export default {
       id: -1,
       error: undefined,
       cnpj: "",
-      supplier: {}
+      supplier: "",
     };
   },
   methods: {
@@ -114,26 +135,55 @@ export default {
 
     findbycnpj() {
       var cnpjtreat;
-      cnpjtreat = this.cnpj.replaceAll('/', '')
-      cnpjtreat = cnpjtreat.replaceAll('-', '')
-      cnpjtreat = cnpjtreat.replaceAll('.', '')
+      cnpjtreat = this.cnpj.replaceAll("/", "");
+      cnpjtreat = cnpjtreat.replaceAll("-", "");
+      cnpjtreat = cnpjtreat.replaceAll(".", "");
       const config = {
         method: "get",
-        url: "https://api.cnpja.com/office/" + cnpjtreat ,
+        url: "https://api.cnpja.com/office/" + cnpjtreat,
         headers: {
-          Authorization: "df691c4f-9148-4ab7-9cdc-7c55622c1376-52756d1a-10b4-4227-98fc-eefc218f774f",
+          Authorization:
+            "df691c4f-9148-4ab7-9cdc-7c55622c1376-52756d1a-10b4-4227-98fc-eefc218f774f",
         },
       };
 
       axios(config)
-        .then(function (response) {
-          let supplier = response.data;
-          console.log(supplier.alias);
+        .then((response) => {
+          this.supplier = response.data.company.name;
+          console.log(this.supplier);
+          this.$refs["my-modal"].show();
         })
-        .catch(function (error) {
+        .catch((error) => {
           console.log(error);
-        });
+          this.errored = true;
+        })
+        .finally(() => (this.loading = false));
     },
+    includeCNPJ() {
+      var req = {
+        headers: {
+          Authorization: "Bearer " + localStorage.getItem("token"),
+        },
+      };
+      axios
+        .post(
+          "https://apiuserssscot.herokuapp.com/user/cnpj",
+          {
+            user_id: localStorage.getItem("id"),
+            cnpj: cnpjtreat,
+          },
+          req
+        )
+        .then((res) => {
+          console.log(res);
+          this.$router.push({ name: "Users" });
+        })
+        .catch((err) => {
+          var msgErro = err.response.data.err;
+          this.error = msgErro;
+        });
+    }
+    
   },
 };
 </script>
