@@ -170,7 +170,7 @@ export default {
           "https://apiuserssscot.herokuapp.com/user/cnpj",
           {
             user_id: localStorage.getItem("id"),
-            cnpj: cnpjtreat,
+            cnpj: this.cnpjtreat,
           },
           req
         )
