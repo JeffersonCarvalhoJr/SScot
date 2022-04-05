@@ -259,7 +259,7 @@ export default {
   filters: {
     processRole: function (value) {
       if (value == 0) {
-        return "Usuário";
+        return "Representante";
       } else if (value == 1) {
         return "Comprador";
       } else if (value == 2) {

@@ -11,76 +11,75 @@ import UserEdit from '../views/user/UserEdit.vue'
 
 
 
-function AdminAuth(to, from, next){
-  if(localStorage.getItem('token') != undefined){
+function AdminAuth(to, from, next) {
+    if (localStorage.getItem('token') != undefined) {
 
-    var req = {
-      headers: {
-        Authorization: "Bearer " + localStorage.getItem('token')
-      }
+        var req = {
+            headers: {
+                Authorization: "Bearer " + localStorage.getItem('token')
+            }
+        }
+
+        axios.post("https://apiuserssscot.herokuapp.com/validate", {}, req).then(res => {
+            console.log(res);
+            next();
+        }).catch(err => {
+            console.log(err.response);
+            console.log(req);
+            next("/login");
+        });
+    } else {
+        next("/login");
     }
-
-    axios.post("https://apiuserssscot.herokuapp.com/validate",{},req).then(res => {
-      console.log(res);
-       next();
-    }).catch(err => {
-      console.log(err.response);
-      console.log(req);
-      next("/login");
-    });
-  }else{
-    next("/login");
-  }
 }
 
 
 Vue.use(VueRouter)
 
-  const routes = [
-  {
-    path: '/',
-    name: 'MainHome',
-    component: Home
-  },
-  {
-    path: '/register',
-    name: 'MainRegister',
-    component: Register
-  },
-  {
-    path: '/login',
-    name: 'MainLogin',
-    component: Login
-  },
-  {
-    path: '/admin/users',
-    name: 'np',
-    component: Users,
-    beforeEnter: AdminAuth
-  },
-  {
-    path: '/admin/users/edit/:id',
-    name: 'MainUserEdit',
-    component: Edit,
-    beforeEnter: AdminAuth
-  },
-  {
-    path: '/home',
-    name: 'HomeModules',
-    component: HomeModules,
-  },
-  {
-    path: '/users/edit/:id',
-    name: 'UserEdit',
-    component: UserEdit,
-  },
-  
+const routes = [{
+        path: '/',
+        name: 'MainHome',
+        component: Home
+    },
+    {
+        path: '/register',
+        name: 'MainRegister',
+        component: Register
+    },
+    {
+        path: '/login',
+        name: 'MainLogin',
+        component: Login
+    },
+    {
+        path: '/admin/users',
+        name: 'np',
+        component: Users,
+        beforeEnter: AdminAuth
+    },
+    {
+        path: '/admin/users/edit/:id',
+        name: 'MainUserEdit',
+        component: Edit,
+        beforeEnter: AdminAuth
+    },
+    {
+        path: '/home',
+        name: 'HomeModules',
+        component: HomeModules,
+    },
+    {
+        path: '/users/edit/:id',
+        name: 'UserEdit',
+        component: UserEdit,
+    },
+
 ]
 
 const router = new VueRouter({
-  mode: 'history',
-  base: process.env.BASE_URL,
-  routes
+    mode: 'history',
+    base: process.env.BASE_URL,
+    routes
 })
 
 export default router
