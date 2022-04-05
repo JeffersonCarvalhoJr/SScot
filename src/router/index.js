@@ -4,6 +4,7 @@ import Home from '../views/MainHome.vue'
 import Register from '../views/MainRegister.vue'
 import Login from '../views/MainLogin.vue'
 import Users from '../views/manager/MainUsers.vue'
+import Suppliers from '../views/buyer_manager/MainSuppliers.vue'
 import axios from 'axios';
 import Edit from '../views/manager/MainEdit.vue'
 import HomeModules from '../views/HomeModules.vue'
@@ -72,6 +73,13 @@ const routes = [{
         path: '/users/edit/:id',
         name: 'UserEdit',
         component: UserEdit,
+    },
+
+    {
+        path: '/admin/supplier',
+        name: 'np',
+        component: Suppliers,
+        beforeEnter: AdminAuth
     },
 
 ]
