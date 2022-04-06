@@ -1,19 +1,17 @@
 <template>
-
-
   <section class="vh-100">
     <div class="mask d-flex align-items-center h-25 gradient-custom-3">
       <div class="container h-100">
         <br />
-        <h2>Manutenção de Usuários</h2>
+        <h2>Aprovação de Representantes</h2>
         <br />
         <table class="table table-bordered">
           <thead class="table table-light">
             <tr>
               <th scope="col">Nome de Usuário</th>
               <th scope="col">E-mail Cadastro</th>
-              <th scope="col">Permissão</th>
-              <th scope="col">Data de Cadastro</th>
+              <th scope="col">CNPJ</th>
+              <th scope="col">Razão Social</th>
               <th scope="col">Ações</th>
             </tr>
           </thead>
@@ -105,10 +103,6 @@
       </div>
     </div>
   </section>
-
-
-
-
 </template>
 
 <script>

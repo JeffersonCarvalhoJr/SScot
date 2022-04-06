@@ -28,7 +28,7 @@
                   class="text-center"
                   style="width: 30rem"
                 >
-                  <a href="/users/edit/:id" class="btn btn-primary stretched-link">Acesse</a>
+                  <a href="/admin/supplier" class="btn btn-primary stretched-link">Acesse</a>
                 </b-card>
                 <br />
                 <b-card

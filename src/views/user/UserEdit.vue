@@ -54,7 +54,7 @@
                         <b-button v-if="msgErro==''"
                           class="mt-2"
                           variant="success"
-                          @click="includeCNPJ(cnpj)"
+                          @click="includeCNPJ(cnpj, supplier)"
                           >Sim</b-button
                         >
                         <h5>{{msgErro}}</h5>
@@ -107,6 +107,7 @@ export default {
       cnpj: "",
       supplier: "",
       msgErro: "",
+      razao_social: "",
     };
   },
   methods: {
@@ -153,7 +154,7 @@ export default {
       axios(config)
         .then((response) => {
           this.supplier = response.data.company.name;
-          console.log(this.supplier);
+          // console.log(this.supplier);
           this.$refs["my-modal"].show();
         })
         .catch((error) => {
@@ -162,7 +163,9 @@ export default {
         })
         .finally(() => (this.loading = false));
     },
-    includeCNPJ(cnpj) {
+    includeCNPJ(cnpj, razao_social) {
+
+      
 
       var req = {
         headers: {
@@ -173,12 +176,14 @@ export default {
         .post(
           "https://apiuserssscot.herokuapp.com/user/cnpj",
           {
+            razao_social: razao_social,
             user_id: localStorage.getItem("id"),
             cnpj: cnpj,
           },
           req
         )
         .then((res) => {
+          console.log(razao_social);
           console.log(res);
           this.$router.push({ name: "HomeModules" });
         })
