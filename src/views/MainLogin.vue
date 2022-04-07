@@ -1,5 +1,6 @@
 <template>
-  <section class="vh-100">
+<main>
+  <section>
     <div id="conteiner" class="mask d-flex align-items-center h-100 gradient-custom-3">
       <div class="container">
         <div class="row d-flex justify-content-center align-items-center h-100">
@@ -56,6 +57,7 @@
       </div>
     </div>
   </section>
+</main>
 </template>
 
 <script>
@@ -106,12 +108,6 @@ export default {
 
 .container {
   width: 100%;
-  height: calc(100vh - 120px);
-}
-
-section {
-  background-color: var(--color-background);
-    width: 100%;
   height: calc(100vh - 120px);
 }
 

@@ -1,7 +1,7 @@
 <template>
 
 
-  <section class="vh-100">
+<main>
     <div class="mask d-flex align-items-center h-25 gradient-custom-3">
       <div class="container h-100">
         <br />
@@ -104,8 +104,7 @@
         </b-modal>
       </div>
     </div>
-  </section>
-
+</main>
 
 
 
@@ -279,8 +278,6 @@ h2 {
   color: white;
 }
 
-section {
-  background-color: var(--color-background);
-}
+
 </style>
 

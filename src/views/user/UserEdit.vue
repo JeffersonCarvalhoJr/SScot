@@ -163,9 +163,7 @@ export default {
         })
         .finally(() => (this.loading = false));
     },
-    includeCNPJ(cnpj, razao_social) {
-
-      
+    includeCNPJ(cnpj, razao_social) {   
 
       var req = {
         headers: {

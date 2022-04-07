@@ -1,17 +1,15 @@
 <template>
-  <section class="vh-100">
-    <div class="mask d-flex align-items-center h-25 gradient-custom-3">
-      <div class="container h-100">
-        <br />
-        <h2>Aprovação de Representantes</h2>
-        <br />
-        <table class="table table-bordered">
+<main>
+
+<div class="text-top"> Aprovação de Representantes</div>
+
+ <table class="table table-bordered">
           <thead class="table table-light">
             <tr>
               <th scope="col">Nome de Usuário</th>
               <th scope="col">E-mail Cadastro</th>
-              <th scope="col">CNPJ</th>
-              <th scope="col">Razão Social</th>
+              <th scope="col">Permissão</th>
+              <th scope="col">Data de Cadastro</th>
               <th scope="col">Ações</th>
             </tr>
           </thead>
@@ -100,9 +98,8 @@
             </b-row>
           </div>
         </b-modal>
-      </div>
-    </div>
-  </section>
+
+</main>
 </template>
 
 <script>
@@ -130,126 +127,12 @@ export default {
   data() {
     return {
       users: [],
-      modalShow: false,
-      deleteUserId: -1,
     };
   },
-
   methods: {
-    hideModal() {
-      this.showModal = false;
-      this.$refs["my-modaldelete"].hide();
-    },
-    showModalUserDelete(id) {
-      this.$refs["my-modaldelete"].show();
-      this.deleteUserId = id;
-    },
-    deleteUser() {
-      var req = {
-        headers: {
-          Authorization: "Bearer " + localStorage.getItem("token"),
-        },
-      };
-      axios
-        .delete(
-          "https://apiuserssscot.herokuapp.com/admin/" + this.deleteUserId,
-          req
-        )
-        .then((res) => {
-          console.log(res);
-          this.$refs["my-modaldelete"].hide();
-          this.users = this.users.filter((u) => u.id != this.deleteUserId);
-        })
-        .catch((err) => {
-          console.log(err);
-          this.$refs["my-modaldelete"].hide();
-        });
-    },
-    showModalUserRole(id) {
-      this.$refs["my-modalrole"].show();
-      this.changeRoleUserId = id;
-    },
 
-    changeRoleUser() {
-      console.log(this.newRole);
-      var req = {
-        headers: {
-          Authorization: "Bearer " + localStorage.getItem("token"),
-        },
-      };
-      axios
-        .put(
-          "https://apiuserssscot.herokuapp.com/admin/",
-          {
-            role: "0",
-            id: this.changeRoleUserId,
-          },
-          req
-        )
-        .then((res) => {
-          console.log(res);
-          location.reload();
-          this.$refs["my-modalrole"].hide();
-        })
-        .catch((err) => {
-          var msgErro = err.response.data.err;
-          this.error = msgErro;
-        });
-    },
-
-    changeRoleBuyer() {
-      console.log(this.newRole);
-      var req = {
-        headers: {
-          Authorization: "Bearer " + localStorage.getItem("token"),
-        },
-      };
-      axios
-        .put(
-          "https://apiuserssscot.herokuapp.com/admin/",
-          {
-            role: "1",
-            id: this.changeRoleUserId,
-          },
-          req
-        )
-        .then((res) => {
-          console.log(res);
-          location.reload();
-          this.$refs["my-modalrole"].hide();
-        })
-        .catch((err) => {
-          var msgErro = err.response.data.err;
-          this.error = msgErro;
-        });
-    },
-    changeRoleManager() {
-      console.log(this.newRole);
-      var req = {
-        headers: {
-          Authorization: "Bearer " + localStorage.getItem("token"),
-        },
-      };
-      axios
-        .put(
-          "https://apiuserssscot.herokuapp.com/admin/",
-          {
-            role: "2",
-            id: this.changeRoleUserId,
-          },
-          req
-        )
-        .then((res) => {
-          console.log(res);
-          location.reload();
-          this.$refs["my-modalrole"].hide();
-        })
-        .catch((err) => {
-          var msgErro = err.response.data.err;
-          this.error = msgErro;
-        });
-    },
   },
+  
   filters: {
     processRole: function (value) {
       if (value == 0) {
@@ -261,7 +144,7 @@ export default {
       }
     },
   },
-};
+}
 </script>
 
 <style scoped>
@@ -269,12 +152,15 @@ td {
   justify-content: center;
   align-items: center;
 }
-h2 {
-  color: white;
+.text-top{
+  color: var(--color-text-light);
+  font-size: 28px;
 }
 
-section {
-  background-color: var(--color-background);
+table{
+  width: 85%;
 }
+
+
 </style>
 

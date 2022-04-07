@@ -1,5 +1,6 @@
 <template>
-<section class="vh-100">
+<main>
+<section>
   <div>
     <br />
     <h2>SSCot - Sistema de Cotações</h2>
@@ -98,6 +99,7 @@
      <h4> {{ role | processRole }}</h4>
   </div>
  </section>
+</main>
 </template>
 
 <script>
@@ -130,10 +132,6 @@ h4 {
 
 h2 {
   color: white;
-}
-
-section{
-  background-color: var(--color-background)
 }
 
 </style>
