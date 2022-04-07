@@ -275,7 +275,7 @@ td {
   align-items: center;
 }
 h2 {
-  color: white;
+  color: var(--color-text-light);
 }
 
 

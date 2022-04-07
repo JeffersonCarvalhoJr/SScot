@@ -1,15 +1,18 @@
 <template>
 <main>
-
-<div class="text-top"> Aprovação de Representantes</div>
-
- <table class="table table-bordered">
+    <div class="mask d-flex align-items-center h-25 gradient-custom-3">
+      <div class="container h-100">
+        <br />
+        <h2>Aprovar Representantes</h2>
+        <br />
+        <table class="table table-bordered">
           <thead class="table table-light">
             <tr>
               <th scope="col">Nome de Usuário</th>
               <th scope="col">E-mail Cadastro</th>
-              <th scope="col">Permissão</th>
-              <th scope="col">Data de Cadastro</th>
+              <th scope="col">CNPJ</th>
+              <th scope="col">Razão Social</th>
+              <th scope="col">Data Solicitação</th>
               <th scope="col">Ações</th>
             </tr>
           </thead>
@@ -18,87 +21,31 @@
               <td>{{ user.name }}</td>
               <td>{{ user.email }}</td>
               <td>{{ user.role | processRole }}</td>
+              <td>{{ user.role | processRole }}</td>
               <td>{{ user.created_at }}</td>
               <td>
-                <router-link
-                  :to="{ name: 'MainUserEdit', params: { id: user.id } }"
-                >
-                  <button style="margin-right: 10px" class="btn btn-warning">
-                    Editar
-                  </button></router-link
-                >
 
                 <button
                   style="margin-right: 10px"
                   class="btn btn-danger"
-                  @click="showModalUserDelete(user.id)"
+                  @click="a"
                 >
-                  Deletar
+                  Reprovar
                 </button>
 
                 <b-button
+                class="btn btn-success"
                   style="margin-right: 10px"
-                  @click="showModalUserRole(user.id)"
+                  @click="a"
                 >
-                  Alçada
+                  Aprovar
                 </b-button>
               </td>
             </tr>
           </tbody>
         </table>
-
-        <b-modal
-          ref="my-modaldelete"
-          hide-footer
-          title="Exclusão de Cadastro de Usuário"
-        >
-          <div class="d-block text-center">
-            <h4>Você deseja realmente deseja excluir este cadastro?</h4>
-
-            <b-row class="mb-2">
-              <b-col>
-                <b-button
-                  class="mt-2"
-                  variant="btn btn-danger"
-                  @click="deleteUser()"
-                  >Sim</b-button
-                >
-              </b-col>
-            </b-row>
-          </div>
-        </b-modal>
-
-        <b-modal ref="my-modalrole" hide-footer title="Alterar Alçada">
-          <div class="d-block text-center">
-            <h4>Escolha a alçada desse usuário:</h4>
-
-            <b-row class="mb-1">
-              <b-col>
-                <b-button
-                  class="changerole"
-                  variant="primary"
-                  @click="changeRoleUser()"
-                  >Usuário</b-button
-                >
-                |
-                <b-button
-                  class="changerole"
-                  variant="primary"
-                  @click="changeRoleBuyer()"
-                  >Comprador</b-button
-                >
-                |
-                <b-button
-                  class="changerole"
-                  variant="primary"
-                  @click="changeRoleManager()"
-                  >Gestor de Compras</b-button
-                >
-              </b-col>
-            </b-row>
-          </div>
-        </b-modal>
-
+      </div>
+    </div>
 </main>
 </template>
 
@@ -152,13 +99,8 @@ td {
   justify-content: center;
   align-items: center;
 }
-.text-top{
+h2 {
   color: var(--color-text-light);
-  font-size: 28px;
-}
-
-table{
-  width: 85%;
 }
 
 

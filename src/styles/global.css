@@ -31,7 +31,4 @@ main {
     background-color: var(--color-background);
     width: 100%;
     height: calc(100vh - 150px);
-    align-items: center;
-    display: flex;
-    flex-direction: column;
 }
