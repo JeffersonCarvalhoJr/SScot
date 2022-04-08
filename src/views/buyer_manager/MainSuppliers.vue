@@ -18,12 +18,12 @@
           </thead>
           <tbody>
             <tr v-for="user in users" :key="user.id" class="table-light">
-              <td>{{ user.name }}</td>
-              <td>{{ user.email }}</td>
-              <td>{{ user.role | processRole }}</td>
-              <td>{{ user.role | processRole }}</td>
-              <td>{{ user.created_at }}</td>
-              <td>
+              <td v-if="user.cnpj !=null">{{ user.name }}</td>
+              <td v-if="user.cnpj !=null">{{ user.email }}</td>
+              <td v-if="user.cnpj !=null">{{ user.cnpj }}</td>
+              <td v-if="user.cnpj !=null">{{ user.razao_social }}</td>
+              <td v-if="user.cnpj !=null">{{ user.sup_created_at }}</td>
+              <td v-if="user.cnpj !=null">
 
                 <button
                   style="margin-right: 10px"
