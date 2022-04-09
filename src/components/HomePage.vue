@@ -62,3 +62,9 @@ export default {
 }
 </script>
 
+<style scoped>
+section {
+    background-color: white;
+}
+</style>
+
