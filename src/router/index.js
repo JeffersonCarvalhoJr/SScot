@@ -79,7 +79,6 @@ const routes = [{
         path: '/admin/supplier',
         name: 'np',
         component: Suppliers,
-        beforeEnter: AdminAuth
     },
 
 ]

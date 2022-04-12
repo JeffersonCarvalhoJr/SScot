@@ -1,5 +1,5 @@
 <template>
-<main>
+  <main>
     <div class="mask d-flex align-items-center h-25 gradient-custom-3">
       <div class="container h-100">
         <br />
@@ -18,25 +18,24 @@
           </thead>
           <tbody>
             <tr v-for="user in users" :key="user.id" class="table-light">
-              <td v-if="user.cnpj !=null">{{ user.name }}</td>
-              <td v-if="user.cnpj !=null">{{ user.email }}</td>
-              <td v-if="user.cnpj !=null">{{ user.cnpj }}</td>
-              <td v-if="user.cnpj !=null">{{ user.razao_social }}</td>
-              <td v-if="user.cnpj !=null">{{ user.sup_created_at }}</td>
-              <td v-if="user.cnpj !=null">
-
+              <td v-if="user.cnpj != null">{{ user.name }}</td>
+              <td v-if="user.cnpj != null">{{ user.email }}</td>
+              <td v-if="user.cnpj != null">{{ user.cnpj }}</td>
+              <td v-if="user.cnpj != null">{{ user.razao_social }}</td>
+              <td v-if="user.cnpj != null">{{ user.sup_created_at }}</td>
+              <td v-if="user.cnpj != null">
                 <button
                   style="margin-right: 10px"
                   class="btn btn-danger"
-                  @click="a"
+                  @click="removeCNPJ(user.cnpj)"
                 >
                   Reprovar
                 </button>
 
                 <b-button
-                class="btn btn-success"
+                  class="btn btn-success"
                   style="margin-right: 10px"
-                  @click="a"
+                  @click="aproveCNPJ(user.cnpj)"
                 >
                   Aprovar
                 </b-button>
@@ -46,7 +45,7 @@
         </table>
       </div>
     </div>
-</main>
+  </main>
 </template>
 
 <script>
@@ -74,12 +73,63 @@ export default {
   data() {
     return {
       users: [],
+      cnpj: "",
     };
   },
   methods: {
+    aproveCNPJ(cnpj) {
+      this.cnpj = cnpj;
+      console.log(cnpj);
 
+      var req = {
+        headers: {
+          Authorization: "Bearer " + localStorage.getItem("token"),
+        },
+      };
+
+      axios
+        .put(
+          "https://apiuserssscot.herokuapp.com/user/cnpj",
+          {
+            cnpj: this.cnpj,
+          },
+          req
+        )
+        .then((res) => {
+          console.log(res);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    },
+    removeCNPJ(cnpj) {
+      this.cnpj = cnpj;
+      console.log(cnpj);
+      
+
+      var req = {
+        headers: {
+          Authorization: "Bearer " + localStorage.getItem("token"),
+        },
+      };
+
+      axios
+        .delete(
+          "https://apiuserssscot.herokuapp.com/user/cnpj",
+          {
+            cnpj: "97.755.177/0001-30",
+          },
+          req
+        )
+        .then((res) => {
+          console.log(res);
+          // this.cnpj = this.cnpj.filter((u) => u.cnpj != this.cnpj);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    },
   },
-  
   filters: {
     processRole: function (value) {
       if (value == 0) {
@@ -91,7 +141,7 @@ export default {
       }
     },
   },
-}
+};
 </script>
 
 <style scoped>
@@ -102,7 +152,5 @@ td {
 h2 {
   color: var(--color-text-light);
 }
-
-
 </style>
 

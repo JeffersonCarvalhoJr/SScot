@@ -155,6 +155,7 @@ export default {
         .then((response) => {
           this.supplier = response.data.company.name;
           // console.log(this.supplier);
+          this.msgErro = '',
           this.$refs["my-modal"].show();
         })
         .catch((error) => {
