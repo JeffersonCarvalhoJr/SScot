@@ -2,20 +2,16 @@
   <div id="app">
      <NavBar />
      <router-view/>
-     <footer-bar />
   </div>
 </template>
 
 <script>
-import FooterBar from './components/FooterBar.vue'
 import NavBar from './components/NavBar'
 import './styles/global.css'
 
 export default {
   components: {
-    NavBar,
-    FooterBar,
-    
+    NavBar,    
   }
 }
 </script>
