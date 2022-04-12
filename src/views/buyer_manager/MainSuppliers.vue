@@ -18,16 +18,16 @@
           </thead>
           <tbody>
             <tr v-for="user in users" :key="user.id" class="table-light">
-              <td v-if="user.cnpj != null">{{ user.name }}</td>
-              <td v-if="user.cnpj != null">{{ user.email }}</td>
-              <td v-if="user.cnpj != null">{{ user.cnpj }}</td>
-              <td v-if="user.cnpj != null">{{ user.razao_social }}</td>
-              <td v-if="user.cnpj != null">{{ user.sup_created_at }}</td>
-              <td v-if="user.cnpj != null">
+              <td v-if="user.cnpj != null && user.aproved == '0'">{{ user.name }}</td>
+              <td v-if="user.cnpj != null && user.aproved == '0'">{{ user.email }}</td>
+              <td v-if="user.cnpj != null && user.aproved == '0'">{{ user.cnpj }}</td>
+              <td v-if="user.cnpj != null && user.aproved == '0'">{{ user.razao_social }}</td>
+              <td v-if="user.cnpj != null && user.aproved == '0'">{{ user.sup_created_at }}</td>
+              <td v-if="user.cnpj != null && user.aproved == '0'">
                 <button
                   style="margin-right: 10px"
                   class="btn btn-danger"
-                  @click="removeCNPJ(user.cnpj)"
+                  @click="aproveCNPJ(user.cnpj, 2, user.sup_id)"
                 >
                   Reprovar
                 </button>
@@ -35,7 +35,7 @@
                 <b-button
                   class="btn btn-success"
                   style="margin-right: 10px"
-                  @click="aproveCNPJ(user.cnpj)"
+                  @click="aproveCNPJ(user.cnpj, 1, user.sup_id)"
                 >
                   Aprovar
                 </b-button>
@@ -77,9 +77,10 @@ export default {
     };
   },
   methods: {
-    aproveCNPJ(cnpj) {
+    aproveCNPJ(cnpj, definition, sup_id) {
       this.cnpj = cnpj;
-      console.log(cnpj);
+      this.definition = definition;
+      this.sup_id = sup_id; 
 
       var req = {
         headers: {
@@ -92,38 +93,15 @@ export default {
           "https://apiuserssscot.herokuapp.com/user/cnpj",
           {
             cnpj: this.cnpj,
+            definition: this.definition,
+            sup_id: this.sup_id,
+
           },
           req
         )
         .then((res) => {
           console.log(res);
-        })
-        .catch((err) => {
-          console.log(err);
-        });
-    },
-    removeCNPJ(cnpj) {
-      this.cnpj = cnpj;
-      console.log(cnpj);
-      
-
-      var req = {
-        headers: {
-          Authorization: "Bearer " + localStorage.getItem("token"),
-        },
-      };
-
-      axios
-        .delete(
-          "https://apiuserssscot.herokuapp.com/user/cnpj",
-          {
-            cnpj: "97.755.177/0001-30",
-          },
-          req
-        )
-        .then((res) => {
-          console.log(res);
-          // this.cnpj = this.cnpj.filter((u) => u.cnpj != this.cnpj);
+          this.$router.go()
         })
         .catch((err) => {
           console.log(err);

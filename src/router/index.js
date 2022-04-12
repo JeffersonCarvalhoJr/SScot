@@ -77,7 +77,7 @@ const routes = [{
 
     {
         path: '/admin/supplier',
-        name: 'np',
+        name: 'MainSupplier',
         component: Suppliers,
     },
 
