@@ -60,7 +60,7 @@ export default {
     };
 
     axios
-      .get("https://apiuserssscot.herokuapp.com/admin", req)
+      .get("https://apiuserssscot.herokuapp.com/admin/cnpj", req)
       .then((res) => {
         console.log(res);
         console.log(this.users);
