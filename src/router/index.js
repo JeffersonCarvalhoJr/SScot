@@ -9,6 +9,7 @@ import axios from 'axios';
 import Edit from '../views/manager/MainEdit.vue'
 import HomeModules from '../views/HomeModules.vue'
 import UserEdit from '../views/user/UserEdit.vue'
+import Products from '../views/buyer_manager/MainProducts.vue'
 
 
 
@@ -79,6 +80,11 @@ const routes = [{
         path: '/admin/supplier',
         name: 'MainSupplier',
         component: Suppliers,
+    },
+    {
+        path: '/products',
+        name: 'MainProduct',
+        component: Products,
     },
 
 ]
