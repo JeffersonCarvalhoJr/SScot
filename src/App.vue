@@ -11,7 +11,7 @@ import './styles/global.css'
 
 export default {
   components: {
-    NavBar,    
+    NavBar,   
   }
 }
 </script>
