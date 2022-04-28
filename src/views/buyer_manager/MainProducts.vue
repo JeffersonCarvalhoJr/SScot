@@ -113,6 +113,10 @@
           <b-button type="reset" variant="danger">Resetar</b-button>
         </b-form>
       </b-container>
+      <div>
+        <input type="file" @change="uploadFile" ref="file" />
+        <button @click="submitFile">Upload!</button>
+      </div>
     </div>
   </main>
 </template>
@@ -141,7 +145,7 @@ export default {
     };
   },
   methods: {
-    onSubmit () { 
+    onSubmit() {
       alert("Produto Cadastrado");
     },
     register() {
@@ -164,6 +168,21 @@ export default {
         .catch((err) => {
           var msgErro = err.response.data.err;
           this.error = msgErro;
+        });
+    },
+    uploadFile() {
+      this.Images = this.$refs.file.files[0];
+    },
+    submitFile() {
+      const formData = new FormData();
+      console.log("teste");
+      formData.append("file", this.Images);
+      const headers = { "Content-Type": "multipart/form-data" };
+      axios
+        .post("http://localhost:5000/upload", formData, { headers })
+        .then((res) => {
+          res.data.files; // binary representation of the file
+          res.status; // HTTP status
         });
     },
   },
