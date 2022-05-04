@@ -186,8 +186,8 @@ export default {
       axios
         .post("http://localhost:5000/upload", formData, { headers })
         .then((res) => {
-          res.data.files; // binary representation of the file
-          res.status; // HTTP status
+          res.data.files;
+          res.status;
         });
     },
   },
