@@ -113,9 +113,15 @@
           <b-button type="reset" variant="danger">Resetar</b-button>
         </b-form>
       </b-container>
+      <br>
+      <h5>Cadastro de Produtos em Lote</h5>
       <div>
         <input type="file" @change="uploadFile" ref="file" />
-        <button @click="submitFile">Upload!</button>
+        <b-button 
+        type="submit" 
+        style="margin-right: 10px"
+        variant="success"
+        @click="submitFile">Upload!</b-button>
       </div>
     </div>
   </main>
@@ -175,7 +181,6 @@ export default {
     },
     submitFile() {
       const formData = new FormData();
-      console.log("teste");
       formData.append("file", this.Images);
       const headers = { "Content-Type": "multipart/form-data" };
       axios
