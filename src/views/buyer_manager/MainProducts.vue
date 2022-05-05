@@ -156,7 +156,7 @@ export default {
     },
     register() {
       axios
-        .post("http://localhost:5000/produtos", {
+        .post("https://apiproducts-sscot.herokuapp.com/produtos", {
           cod_fam: this.cod_fam,
           desc_fam: this.desc_fam,
           cod_prod: this.cod_fam,
@@ -184,7 +184,7 @@ export default {
       formData.append("file", this.Images);
       const headers = { "Content-Type": "multipart/form-data" };
       axios
-        .post("http://localhost:5000/upload", formData, { headers })
+        .post("https://apiproducts-sscot.herokuapp.com/upload", formData, { headers })
         .then((res) => {
           res.data.files;
           res.status;

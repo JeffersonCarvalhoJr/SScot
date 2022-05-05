@@ -85,6 +85,7 @@ const routes = [{
         path: '/products',
         name: 'MainProduct',
         component: Products,
+        beforeEnter: AdminAuth
     },
 
 ]
