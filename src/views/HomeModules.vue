@@ -18,7 +18,7 @@
                   class="text-center"
                   style="width: 30rem"
                 >
-                  <a href="#" class="btn btn-primary stretched-link">Acesse</a>
+                  <a href="/products" class="btn btn-primary stretched-link">Acesse</a>
                 </b-card>
                 <br />
 
