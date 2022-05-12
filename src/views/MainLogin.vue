@@ -47,7 +47,7 @@
 
                   <p class="text-center text-muted mt-5 mb-0">
                     Esqueceu sua senha?
-                    <a href="?" class="fw-bold text-body"><u>Clique aqui</u></a>
+                    <a href="/recoverpassword" class="fw-bold text-body"><u>Clique aqui</u></a>
                   </p>
                 </form>
               </div>

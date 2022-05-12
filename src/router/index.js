@@ -3,6 +3,8 @@ import VueRouter from 'vue-router'
 import Home from '../views/MainHome.vue'
 import Register from '../views/MainRegister.vue'
 import Login from '../views/MainLogin.vue'
+import RecoverPass from '../views/MainRecoverPass.vue'
+import ChangePass from '../views/MainChangePass.vue'
 import Users from '../views/manager/MainUsers.vue'
 import Suppliers from '../views/buyer_manager/MainSuppliers.vue'
 import axios from 'axios';
@@ -52,6 +54,16 @@ const routes = [{
         path: '/login',
         name: 'MainLogin',
         component: Login
+    },
+    {
+        path: '/recoverpassword',
+        name: 'MainRecoverPass',
+        component: RecoverPass
+    },
+    {
+        path: '/changepassword/:token',
+        name: 'MainChangePass',
+        component: ChangePass
     },
     {
         path: '/admin/users',
