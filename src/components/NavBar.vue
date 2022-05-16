@@ -25,7 +25,7 @@ export default {
   methods: {
     handleLogout() {
       localStorage.setItem("token", "null");
-      this.$router.push({ name: "MainHome" });
+      this.$router.go()
     },
   },
 };

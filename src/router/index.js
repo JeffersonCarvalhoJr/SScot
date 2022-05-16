@@ -81,6 +81,7 @@ const routes = [{
         path: '/home',
         name: 'HomeModules',
         component: HomeModules,
+        beforeEnter: AdminAuth
     },
     {
         path: '/users/edit/:id',
