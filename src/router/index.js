@@ -12,6 +12,7 @@ import Edit from '../views/manager/MainEdit.vue'
 import HomeModules from '../views/HomeModules.vue'
 import UserEdit from '../views/user/UserEdit.vue'
 import Products from '../views/buyer_manager/MainProducts.vue'
+import Cotation from '../views/buyer_manager/MainCotation.vue'
 
 
 
@@ -98,6 +99,12 @@ const routes = [{
         path: '/products',
         name: 'MainProduct',
         component: Products,
+        beforeEnter: AdminAuth
+    },
+    {
+        path: '/cotation',
+        name: 'MainCotation',
+        component: Cotation,
         beforeEnter: AdminAuth
     },
 
