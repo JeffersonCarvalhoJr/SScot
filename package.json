@@ -27,6 +27,7 @@
         "eslint-plugin-vue": "^8.0.3",
         "express": "^4.17.3",
         "vue": "^2.6.14",
+        "vue-multiselect": "^2.1.6",
         "vue-router": "^3.5.1",
         "vue-template-compiler": "^2.6.14",
         "vue-the-mask": "^0.11.1"

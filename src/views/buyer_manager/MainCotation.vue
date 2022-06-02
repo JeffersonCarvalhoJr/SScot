@@ -8,31 +8,15 @@
       </header>
 
       <b-row>
-        <b-form-group label="Fornecedores:">
-          <b-form-input
-            v-model="forn_name"
-            type="search"
-            placeholder="Procure os fornecedores para cotação"
-          ></b-form-input>
-          <br />
-          <b-button
-            type="submit"
-            style="margin-right: 10px"
-            @click="register"
-            variant="primary"
-            class="mr-3"
-            >Procurar</b-button
-          >
+        <b-form-group label="Selecione os Fornecedores:">
+          <multiselect
+            v-model="value"
+            :options="users"
+            :multiple="true"
+            :custom-label="razaoSocial"
+          ></multiselect>
         </b-form-group>
       </b-row>
-
-      <b-col md="4" sm="12">
-        <h4>
-          {{ value[0] }}<br />
-          {{ value[1] }}<br />
-          {{ value[2] }}
-        </h4>
-      </b-col>
       <br />
       <b-form>
         <b-row>
@@ -49,11 +33,45 @@
                   <th scope="col">Quantidade</th>
                 </tr>
               </thead>
+              <tr class="table-light">
+                <td>
+                  <b-form-input
+                    v-model="cod_prod"
+                    type="search"
+                    placeholder="..."
+                  ></b-form-input>
+                </td>
+                <td>teste</td>
+                <td>
+                  <b-form-input
+                    v-model="cod_der"
+                    type="search"
+                    placeholder="..."
+                  ></b-form-input>
+                </td>
+                <td>teste</td>
+                <td>
+                  <b-form-input
+                    v-model="colecao"
+                    type="search"
+                    placeholder="..."
+                  ></b-form-input>
+                </td>
+                <td>teste</td>
+                <td>
+                  <b-form-input
+                    v-model="qtd"
+                    type="search"
+                    placeholder="..."
+                  ></b-form-input>
+                </td>
+              </tr>
             </table>
           </b-col>
         </b-row>
+        <br />
         <b-row>
-          <b-col md="4" sm="12">
+          <b-col md="8" sm="12">
             <b-row style="text-align: left">
               <h6>Notificar Fornecedores:</h6>
               <b-form-checkbox
@@ -80,7 +98,8 @@
           </b-col>
 
           <b-col md="4" sm="12">
-            <b-button>Gerar Cotação</b-button>
+            <br>
+            <b-button variant="success">Gerar Cotação</b-button>
           </b-col>
         </b-row>
       </b-form>
@@ -89,17 +108,46 @@
 </template>
 
 <script>
-// import axios from "axios";
+import axios from "axios";
+import Multiselect from "vue-multiselect";
+
 export default {
+created() {
+    var req = {
+      headers: {
+        Authorization: "Bearer " + localStorage.getItem("token"),
+      },
+    };
+
+    axios
+      .get("https://apiuserssscot.herokuapp.com/cnpj", req)
+      .then((res) => {
+        console.log(res);
+        console.log(this.users);
+        this.users = res.data;
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  },
+
+  components: { Multiselect },
   data() {
     return {
       cotation: 156.554,
-      value: ["Fornecedor 1", "Fornecedor 2", "Fornecedor 3"],
+      value: null,
+      users: []
     };
   },
-  methods: {},
+  methods: {
+    razaoSocial({ razao_social }) {
+      return `${razao_social}`;
+    },
+  },
 };
 </script>
+
+<style src="vue-multiselect/dist/vue-multiselect.min.css"></style>
 
 <style scoped>
 h2 {
