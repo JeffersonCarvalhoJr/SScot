@@ -14,10 +14,17 @@
             :options="users"
             :multiple="true"
             :custom-label="razaoSocial"
+            placeholder="Adicione um novo fornecedor"
           ></multiselect>
         </b-form-group>
       </b-row>
       <br />
+      <b-col md="20" sm="12">
+        <b-button @click="addNewTodo" variant="primary"
+          >Adicionar novo produto</b-button
+        >
+        <br /><br />
+      </b-col>
       <b-form>
         <b-row>
           <b-col>
@@ -33,7 +40,7 @@
                   <th scope="col">Quantidade</th>
                 </tr>
               </thead>
-              <tr class="table-light">
+              <tr  v-for="(todo, index) in todos" v-bind:key="todo.id" v-bind:title="todo.title" v-on:remove="todos.splice(index, 1)" class="table-light">
                 <td>
                   <b-form-input
                     v-model="cod_prod"
@@ -41,7 +48,7 @@
                     placeholder="..."
                   ></b-form-input>
                 </td>
-                <td>teste</td>
+                <td></td>
                 <td>
                   <b-form-input
                     v-model="cod_der"
@@ -49,7 +56,7 @@
                     placeholder="..."
                   ></b-form-input>
                 </td>
-                <td>teste</td>
+                <td></td>
                 <td>
                   <b-form-input
                     v-model="colecao"
@@ -57,7 +64,7 @@
                     placeholder="..."
                   ></b-form-input>
                 </td>
-                <td>teste</td>
+                <td></td>
                 <td>
                   <b-form-input
                     v-model="qtd"
@@ -69,6 +76,7 @@
             </table>
           </b-col>
         </b-row>
+
         <br />
         <b-row>
           <b-col md="8" sm="12">
@@ -98,7 +106,7 @@
           </b-col>
 
           <b-col md="4" sm="12">
-            <br>
+            <br />
             <b-button variant="success">Gerar Cotação</b-button>
           </b-col>
         </b-row>
@@ -112,7 +120,7 @@ import axios from "axios";
 import Multiselect from "vue-multiselect";
 
 export default {
-created() {
+  created() {
     var req = {
       headers: {
         Authorization: "Bearer " + localStorage.getItem("token"),
@@ -136,10 +144,25 @@ created() {
     return {
       cotation: 156.554,
       value: null,
-      users: []
+      users: [],
+      newProduct: "",
+      todos: [
+        {
+          id: "",
+          cod_prod: "",
+        },
+      ],
+      nextProductId: 2,
     };
   },
   methods: {
+    addNewTodo: function () {
+      this.todos.push({
+        id: this.nextTodoId++,
+        cod_prod: this.newProduct,
+      });
+      this.newProduct = "";
+    },
     razaoSocial({ razao_social }) {
       return `${razao_social}`;
     },
