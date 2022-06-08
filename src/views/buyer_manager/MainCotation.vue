@@ -10,18 +10,24 @@
       <b-row>
         <b-form-group label="Selecione os Fornecedores:">
           <multiselect
-            v-model="value"
+            v-model="selectedSuppliers"
             :options="users"
             :multiple="true"
-            :custom-label="razaoSocial"
-            placeholder="Adicione um novo fornecedor"
+            track-by="sup_id"
+            label="razao_social"
+            placeholder=""
+            
           ></multiselect>
         </b-form-group>
       </b-row>
       <br />
       <b-col md="20" sm="12">
         <b-button @click="addNewline" variant="primary"
-          >Adicionar novo produto</b-button
+          >Adicionar Produto</b-button
+        >
+        |
+        <b-button @click="removeNewLine" variant="danger"
+          >Remover Produto</b-button
         >
         <br /><br />
       </b-col>
@@ -100,14 +106,18 @@
                   ></b-form-input>
                 </td>
 
-                <tr v-for="todo in todos" :key="todo.id" class="table-light">
-                  <td>{{ todo.cod_prod }}</td>
-                  <td>{{ todo.desc_prod }}</td>
-                  <td>{{ todo.cod_der }}</td>
-                  <td>{{ todo.desc_der }}</td>
-                  <td>{{ todo.colecao }}</td>
-                  <td>{{ todo.um }}</td>
-                  <td>{{ todo.qtd }}</td>
+                <tr
+                  v-for="product in products"
+                  :key="product.id"
+                  class="table-light"
+                >
+                  <td>{{ product.cod_prod }}</td>
+                  <td>{{ product.desc_prod }}</td>
+                  <td>{{ product.cod_der }}</td>
+                  <td>{{ product.desc_der }}</td>
+                  <td>{{ product.colecao }}</td>
+                  <td>{{ product.um }}</td>
+                  <td>{{ product.qtd }}</td>
                 </tr>
               </tbody>
             </table>
@@ -122,7 +132,7 @@
               <h6>Notificar Fornecedores:</h6>
               <b-form-checkbox
                 id="checkbox-1"
-                v-model="status"
+                v-model="emailCheckbox"
                 name="checkbox-1"
                 value="accepted"
                 unchecked-value="not_accepted"
@@ -133,7 +143,7 @@
               <br />
               <b-form-checkbox
                 id="checkbox-2"
-                v-model="status"
+                v-model="wppCheckbox"
                 name="checkbox-2"
                 value="accepted"
                 unchecked-value="not_accepted"
@@ -172,8 +182,8 @@ export default {
     axios
       .get("https://apiuserssscot.herokuapp.com/cnpj", req)
       .then((res) => {
-        console.log(res);
-        console.log(this.users);
+        // console.log(res);
+        // console.log(this.users);
         this.users = res.data;
       })
       .catch((err) => {
@@ -185,9 +195,9 @@ export default {
   data() {
     return {
       cotation: 156.554,
-      value: null,
+      selectedSuppliers: null,
       users: [],
-      todos: [],
+      products: [],
       newCodProd: "",
       newDescProd: "",
       newCodDer: "",
@@ -195,12 +205,17 @@ export default {
       newColecao: "",
       newUM: "",
       newQTD: "",
-      nextProductId: 1,
+      nextProductId: 2,
+      wppCheckbox: false,
+      emailCheckbox: false,
     };
   },
   methods: {
+    removeNewLine() {
+      this.products.pop();
+    },
     addNewline: function () {
-      this.todos.push({
+      this.products.push({
         id: this.nextProductId++,
         cod_prod: this.newCodProd,
         desc_prod: this.newDescProd,
@@ -217,7 +232,8 @@ export default {
       this.newColecao = "";
       this.newUM = "";
       this.newQTD = "";
-      console.log(this.todos);
+      console.log(this.products);
+      console.log(this.selectedSuppliers);
     },
     razaoSocial({ razao_social }) {
       return `${razao_social}`;
