@@ -16,7 +16,6 @@
             track-by="sup_id"
             label="razao_social"
             placeholder=""
-            
           ></multiselect>
         </b-form-group>
       </b-row>
@@ -134,21 +133,8 @@
                 id="checkbox-1"
                 v-model="emailCheckbox"
                 name="checkbox-1"
-                value="accepted"
-                unchecked-value="not_accepted"
               >
                 E-mail
-              </b-form-checkbox>
-
-              <br />
-              <b-form-checkbox
-                id="checkbox-2"
-                v-model="wppCheckbox"
-                name="checkbox-2"
-                value="accepted"
-                unchecked-value="not_accepted"
-              >
-                Whatsapp
               </b-form-checkbox>
             </b-row>
           </b-col>
@@ -157,7 +143,9 @@
 
           <b-col md="4" sm="12">
             <br />
-            <b-button variant="success">Gerar Cotação</b-button>
+            <b-button @click="newCotation()" variant="success"
+              >Gerar Cotação</b-button
+            >
           </b-col>
         </b-row>
 
@@ -206,11 +194,33 @@ export default {
       newUM: "",
       newQTD: "",
       nextProductId: 2,
-      wppCheckbox: false,
       emailCheckbox: false,
     };
   },
   methods: {
+    newCotation() {
+// https://apiproducts-sscot.herokuapp.com/cotation
+// http://localhost:5000/cotation
+      axios
+        .post("https://apiproducts-sscot.herokuapp.com/cotation", {
+          users: this.selectedSuppliers,          
+          products: this.products,
+          notifyEmail: this.emailCheckbox,
+        })
+        .then((res) => {
+          console.log(res);
+          this.$router.push({ name: "HomeModules" });
+        })
+        .catch((err) => {
+          var msgErro = err.response.data.err;
+          this.error = msgErro;
+        });
+
+
+      console.log(this.products);
+      console.log(this.selectedSuppliers);
+      console.log(this.emailCheckbox);
+    },
     removeNewLine() {
       this.products.pop();
     },
@@ -232,8 +242,6 @@ export default {
       this.newColecao = "";
       this.newUM = "";
       this.newQTD = "";
-      console.log(this.products);
-      console.log(this.selectedSuppliers);
     },
     razaoSocial({ razao_social }) {
       return `${razao_social}`;
