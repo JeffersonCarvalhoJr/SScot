@@ -2,7 +2,7 @@
   <main>
     <h2>Cadastro de Cotação</h2>
 
-    <div class="card p-5 col-sm-8" style="border-radius: 15px">
+    <div class="card p-5 col-sm-10" style="border-radius: 15px">
       <header style="text-align: left">
         <h4>Cotação N°: {{ cotation }}</h4>
       </header>
@@ -52,8 +52,9 @@
                     type="text"
                     v-model="newCodProd"
                     id="new-product"
-                    placeholder="..."
+                    placeholder=""
                     @blur="findDescProdByCodProd()"
+                    style="text-align:center;"
                   ></b-form-input>
                 </td>
                 <td>
@@ -61,7 +62,8 @@
                     type="text"
                     v-model="newDescProd"
                     id="new-product"
-                    placeholder="..."
+                    placeholder=""
+                    style="text-align:center;"
                   ></b-form-input>
                 </td>
                 <td>
@@ -69,8 +71,9 @@
                     type="text"
                     v-model="newCodDer"
                     id="new-CODDER"
-                    placeholder="..."
+                    placeholder=""
                     @blur="findDescDerbyCodDer()"
+                    style="text-align:center;"
                   ></b-form-input>
                 </td>
                 <td>
@@ -78,13 +81,15 @@
                     type="text"
                     v-model="newDescDer"
                     id="new-DESCDER"
-                    placeholder="..."
+                    placeholder=""
+                    style="text-align:center;"
                   ></b-form-input>
                 </td>
                 <td>
                   <select
                     class="form-control"
                     id="colecao"
+                    style="text-align:center;"
                     v-model="newColecao"
                   >
                     <option>OI2022</option>
@@ -96,7 +101,8 @@
                     type="text"
                     v-model="newUM"
                     id="new-UM"
-                    placeholder="..."
+                    placeholder=""
+                    style="text-align:center;"
                   ></b-form-input>
                 </td>
                 <td>
@@ -104,8 +110,9 @@
                     type="text"
                     v-model="newQTD"
                     id="new-QTD"
-                    placeholder="..."
+                    placeholder=""
                     @keyup.enter="addNewline"
+                    style="text-align:center;"
                   ></b-form-input>
                 </td>
 
