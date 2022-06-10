@@ -92,7 +92,7 @@
           <b-icon icon="bag-plus-fill" variant="light"></b-icon>
         </div>
       </b-row>
-      <b-button href="/cotation" variant="primary">Nova Cotação Rápida</b-button>
+      <b-button href="/cotation" variant="primary">Nova Cotação</b-button>
     </b-container>
       <br>
       <h4> {{ name }}</h4>
