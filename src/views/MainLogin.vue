@@ -45,6 +45,7 @@
                         type="button"
                         @click="login"
                         class="btn btn-primary"
+                        @keyup.enter="login"
                       >
                         Login
                       </button>

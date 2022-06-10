@@ -4,7 +4,7 @@
 
     <div class="card p-5 col-sm-10" style="border-radius: 15px">
       <header style="text-align: left">
-        <h4>Cotação N°: {{ cotation }}</h4>
+        <h4>Cotação N°: {{ cot_number }}</h4>
       </header>
 
       <b-row>
@@ -193,7 +193,7 @@ export default {
   components: { Multiselect },
   data() {
     return {
-      cotation: 156.554,
+      cot_number: localStorage.getItem("id") + "-" + Date.now(),
       selectedSuppliers: null,
       users: [],
       products: [],
@@ -233,8 +233,8 @@ export default {
 
     newCotation() {
 
-      console.log(this.products)
-      console.log(this.selectedSuppliers)
+  //    console.log(this.products)
+  //    console.log(this.selectedSuppliers)
 
         if (this.selectedSuppliers == null || this.selectedSuppliers.length == 0 || this.products.length == 0){
           alert("Não é possivel gerar nova cotação sem fornecedores ou Produtos cadastrados!")
@@ -249,9 +249,11 @@ export default {
           users: this.selectedSuppliers,
           products: this.products,
           notifyEmail: this.emailCheckbox,
+          cot_number: this.cot_number
         })
         .then((res) => {
           console.log(res);
+          alert("Cotação Gerada!")
           this.$router.push({ name: "HomeModules" });
         })
         .catch((err) => {
