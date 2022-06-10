@@ -111,8 +111,7 @@
                     v-model="newQTD"
                     id="new-QTD"
                     placeholder=""
-                    @keyup.enter="addNewline"
-                    @keyup.tab="addNewline"
+                    @keyup.enter="addNewline"                    
                     style="text-align:center;"
                   ></b-form-input>
                 </td>
