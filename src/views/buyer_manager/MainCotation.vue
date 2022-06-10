@@ -53,6 +53,7 @@
                     v-model="newCodProd"
                     id="new-product"
                     placeholder="..."
+                    @blur="findDescProdByCodProd()"
                   ></b-form-input>
                 </td>
                 <td>
@@ -69,6 +70,7 @@
                     v-model="newCodDer"
                     id="new-CODDER"
                     placeholder="..."
+                    @blur="findDescDerbyCodDer()"
                   ></b-form-input>
                 </td>
                 <td>
@@ -80,12 +82,14 @@
                   ></b-form-input>
                 </td>
                 <td>
-                  <b-form-input
-                    type="text"
+                  <select
+                    class="form-control"
+                    id="colecao"
                     v-model="newColecao"
-                    id="new-COLECAO"
-                    placeholder="..."
-                  ></b-form-input>
+                  >
+                    <option>OI2022</option>
+                    <option>PV20222023</option>
+                  </select>
                 </td>
                 <td>
                   <b-form-input
@@ -194,16 +198,48 @@ export default {
       newUM: "",
       newQTD: "",
       nextProductId: 2,
-      emailCheckbox: false,
+      emailCheckbox: true,
+      findProduct: [],
+      findDer: [],
     };
   },
   methods: {
+    findDescProdByCodProd() {
+      axios
+        .get("https://apiproducts-sscot.herokuapp.com/produto/" + this.newCodProd)
+        .then((res) => {
+          this.findProduct = res.data;
+          this.newDescProd = res.data[0].desc_prod;
+          this.newUM = res.data[0].UM;
+        })
+        .catch((err) => {
+          console.log(err.response);
+        });
+    },
+    findDescDerbyCodDer() {
+      this.findDer = this.findProduct.filter(
+        (findProduct) => findProduct.cod_der == this.newCodDer
+      );
+      this.newDescDer = this.findDer[0].desc_der;
+      console.log(this.newDescDer);
+    },
+
     newCotation() {
-// https://apiproducts-sscot.herokuapp.com/cotation
-// http://localhost:5000/cotation
+
+      console.log(this.products)
+      console.log(this.selectedSuppliers)
+
+        if (this.selectedSuppliers == null || this.selectedSuppliers.length == 0 || this.products.length == 0){
+          alert("Não é possivel gerar nova cotação sem fornecedores ou Produtos cadastrados!")
+        
+        
+        } else{      
+
+      // https://apiproducts-sscot.herokuapp.com/cotation
+      // http://localhost:5000/cotation
       axios
         .post("https://apiproducts-sscot.herokuapp.com/cotation", {
-          users: this.selectedSuppliers,          
+          users: this.selectedSuppliers,
           products: this.products,
           notifyEmail: this.emailCheckbox,
         })
@@ -216,14 +252,10 @@ export default {
           this.error = msgErro;
         });
 
-
       console.log(this.products);
       console.log(this.selectedSuppliers);
       console.log(this.emailCheckbox);
-    },
-    removeNewLine() {
-      this.products.pop();
-    },
+    }},
     addNewline: function () {
       this.products.push({
         id: this.nextProductId++,
@@ -243,6 +275,10 @@ export default {
       this.newUM = "";
       this.newQTD = "";
     },
+    removeNewLine() {
+      this.products.pop();
+    },
+
     razaoSocial({ razao_social }) {
       return `${razao_social}`;
     },
