@@ -112,6 +112,7 @@
                     id="new-QTD"
                     placeholder=""
                     @keyup.enter="addNewline"
+                    @keyup.tab="addNewline"
                     style="text-align:center;"
                   ></b-form-input>
                 </td>
@@ -259,9 +260,6 @@ export default {
           this.error = msgErro;
         });
 
-      console.log(this.products);
-      console.log(this.selectedSuppliers);
-      console.log(this.emailCheckbox);
     }},
     addNewline: function () {
       this.products.push({
@@ -281,6 +279,7 @@ export default {
       this.newColecao = "";
       this.newUM = "";
       this.newQTD = "";
+      document.getElementById("new-product").focus();
     },
     removeNewLine() {
       this.products.pop();
