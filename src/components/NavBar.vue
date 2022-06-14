@@ -20,6 +20,7 @@ export default {
   data() {
     return {
       message: localStorage.getItem("token"),
+      role: localStorage.getItem("role"),
     };
   },
   methods: {

@@ -14,34 +14,23 @@
                 <b-card
                   bg-variant="light"
                   text-variant="Light"
-                  header="Produtos"
+                  header="Cotações"
                   class="text-center"
                   style="width: 30rem"
                 >
-                  <a href="/products" class="btn btn-primary stretched-link">Acesse</a>
+                  <a href="/listcotation" class="btn btn-primary stretched-link">Acesse</a>
                 </b-card>
                 <br />
 
                 <b-card
                   bg-variant="light"
                   text-variant="Light"
-                  header="Fornecedores"
+                  header="Novas Representadas"
                   class="text-center"
                   style="width: 30rem"
                 >
-                  <a href="/admin/supplier" class="btn btn-primary stretched-link">Acesse</a>
+                  <a href="/users/edit" class="btn btn-primary stretched-link">Acesse</a>
                 </b-card>
-                <br />
-                <b-card
-                  bg-variant="light"
-                  text-variant="Light"
-                  header="Cotações"
-                  class="text-center"
-                  style="width: 30rem"
-                >
-                  <a href="#" class="btn btn-primary stretched-link">Acesse</a>
-                </b-card>
-                <br />
               </b-card-group>
             </div>
           </div>
@@ -63,36 +52,17 @@
               <b-card
                 bg-variant="light"
                 text-variant="Light"
-                header="Dashboard Produtos"
+                header="Meu Usuário"
                 class="text-center"
                 style="width: 30rem"
               >
                 <a href="#" class="btn btn-primary stretched-link">Acesse</a>
               </b-card>
               <br />
-              <b-card
-                bg-variant="light"
-                text-variant="Light"
-                header="Usuários"
-                class="text-center"
-                style="width: 30rem"
-              >
-                <a href="/admin/users" class="btn btn-primary stretched-link"
-                  >Acesse</a
-                >
-              </b-card>
-              <br />
             </b-card-group>
           </div>
         </b-col>
       </b-row>
-      <br /><br />
-      <b-row>
-        <div align="center" style="font-size: 4rem">
-          <b-icon icon="bag-plus-fill" variant="light"></b-icon>
-        </div>
-      </b-row>
-      <b-button href="/cotation" variant="primary">Nova Cotação</b-button>
     </b-container>
       <br>
       <h4> {{ name }}</h4>
@@ -114,7 +84,7 @@ export default {
      filters: {
     processRole: function (value) {
       if (value == 0) {
-        return "Usuário";
+        return "Representante";
       } else if (value == 1) {
         return "Comprador";
       } else if (value == 2) {

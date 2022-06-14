@@ -9,10 +9,12 @@ import Users from '../views/manager/MainUsers.vue'
 import Suppliers from '../views/buyer_manager/MainSuppliers.vue'
 import axios from 'axios';
 import Edit from '../views/manager/MainEdit.vue'
-import HomeModules from '../views/HomeModules.vue'
+import HomeModules from '../views/buyer_manager/HomeModules.vue'
+import HomeModulesSup from '../views/supplier/HomeModules.vue'
 import UserEdit from '../views/user/UserEdit.vue'
 import Products from '../views/buyer_manager/MainProducts.vue'
 import Cotation from '../views/buyer_manager/MainCotation.vue'
+import ListCotation from '../views/supplier/ListCotation.vue'
 
 
 
@@ -85,6 +87,11 @@ const routes = [{
         beforeEnter: AdminAuth
     },
     {
+        path: '/homesup',
+        name: 'HomeModulesSup',
+        component: HomeModulesSup,
+    },
+    {
         path: '/users/edit',
         name: 'UserEdit',
         component: UserEdit,
@@ -94,6 +101,7 @@ const routes = [{
         path: '/admin/supplier',
         name: 'MainSupplier',
         component: Suppliers,
+
     },
     {
         path: '/products',
@@ -106,6 +114,11 @@ const routes = [{
         name: 'MainCotation',
         component: Cotation,
         beforeEnter: AdminAuth
+    },
+    {
+        path: '/listcotation',
+        name: 'ListCotation',
+        component: ListCotation,
     },
 
 ]

@@ -245,7 +245,7 @@ export default {
       // https://apiproducts-sscot.herokuapp.com/cotation
       // http://localhost:5000/cotation
       axios
-        .post("https://apiproducts-sscot.herokuapp.com/cotation", {
+        .post("http://localhost:5000/cotation", {
           users: this.selectedSuppliers,
           products: this.products,
           notifyEmail: this.emailCheckbox,

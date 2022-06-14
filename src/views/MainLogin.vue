@@ -92,10 +92,10 @@ export default {
             localStorage.setItem("role", res.data.role);
 
             if (res.data.role == 0) {
-              this.$router.push({
-                name: "UserEdit",
-                params: res.data.role,
-              });
+            this.$router.push({
+                name: "HomeModulesSup",            
+              })
+
             } else {
               this.$router.push({
                 name: "HomeModules",            
