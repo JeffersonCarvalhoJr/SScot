@@ -51,9 +51,10 @@ export default {
   },
 
   //  http://localhost:5000/cotation
+  // https://apiproducts-sscot.herokuapp.com/cotation/
   created() {
     axios
-      .get("http://localhost:5000/cotation/" + this.id)
+      .get("https://apiproducts-sscot.herokuapp.com/cotation/" + this.id)
       .then((res) => {
         console.log(res);
         console.log(this.cotations);
