@@ -26,10 +26,13 @@
               <td>{{ cotation.cnpj }}</td>
               <td>{{ cotation.status }}</td>
               <td>
-                <b-button
-                  style="margin-right: 10px" class="btn btn-success">
-                  Ver Cotação
-                </b-button>
+                <router-link
+                  :to="{ name: 'MainUserEdit', params: { cotation: cotation.cot_number } }"
+                >
+                  <button style="margin-right: 10px" class="btn btn-success">
+                    Responder
+                  </button></router-link
+                >
               </td>
             </tr>
           </tbody>

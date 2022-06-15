@@ -14,6 +14,7 @@ import HomeModulesSup from '../views/supplier/HomeModules.vue'
 import UserEdit from '../views/user/UserEdit.vue'
 import Products from '../views/buyer_manager/MainProducts.vue'
 import Cotation from '../views/buyer_manager/MainCotation.vue'
+import CotationSup from '../views/supplier/MainCotation.vue'
 import ListCotation from '../views/supplier/ListCotation.vue'
 
 
@@ -115,6 +116,12 @@ const routes = [{
         component: Cotation,
         beforeEnter: AdminAuth
     },
+    {
+        path: '/cotationsup',
+        name: 'MainCotationSup',
+        component: CotationSup,
+    },
+
     {
         path: '/listcotation',
         name: 'ListCotation',
