@@ -27,7 +27,7 @@
               <td>{{ cotation.status }}</td>
               <td>
                 <router-link
-                  :to="{ name: 'MainUserEdit', params: { cotation: cotation.cot_number } }"
+                  :to="{ name: 'MainCotationSup', params: { user_id: cotation.user_id, cot_number: cotation.cot_number, sup_id: cotation.sup_id  } }"
                 >
                   <button style="margin-right: 10px" class="btn btn-success">
                     Responder

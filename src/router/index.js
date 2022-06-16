@@ -117,7 +117,7 @@ const routes = [{
         beforeEnter: AdminAuth
     },
     {
-        path: '/cotationsup',
+        path: '/cotationsup/:user_id/:cot_number/:sup_id',
         name: 'MainCotationSup',
         component: CotationSup,
     },

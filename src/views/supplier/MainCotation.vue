@@ -1,15 +1,15 @@
 <template>
   <main>
-    <h2>Cotação n° 24-1655252676248</h2>
+    <h2>Cotação n° {{ cotations[0].cot_number }}</h2>
 
     <div class="card p-5 col-sm-10" style="border-radius: 15px">
       <header style="text-align: left">
-        <h4>À AMAZON SERVICOS DE VAREJO DO BRASIL LTDA.</h4>
-        <h5>CNPJ 15.436.940/0001-03</h5>
+        <h4>À {{ cotations[0].razao_social }}</h4>
+        <h5>CNPJ {{ cotations[0].cnpj }}</h5>
         <hr />
         <h6>Prezado(a) Sr(a).</h6>
         <h6>
-          Venho por meio desta solicitar cotação de preços para os
+          Viemos por meio desta solicitar cotação de preços para os
           produtos/serviços abaixo discriminados:
         </h6>
       </header>
@@ -42,66 +42,24 @@
                 </tr>
               </thead>
               <tbody>
+                <tr v-for="cotation in cotations" :key="cotation.id" class="table-light">
                 <td>
-                  <b-form-input
-                    type="text"
-                    disabled
-                    v-model="newDescProd"
-                    id="new-product"
-                    placeholder=""
-                    style="text-align: center"
-                    
-                  ></b-form-input>
+                {{cotation.cod_prod}}
                 </td>
-                                <td>
-                  <b-form-input
-                    type="text"
-                    disabled
-                    v-model="newDescProd"
-                    id="new-product"
-                    placeholder=""
-                    style="text-align: center"
-                  ></b-form-input>
+                <td>
+                {{cotation.desc_prod}}
                 </td>
-                                <td>
-                  <b-form-input
-                    type="text"
-                    disabled
-                    v-model="newDescProd"
-                    id="new-product"
-                    placeholder=""
-                    style="text-align: center"
-                  ></b-form-input>
+                <td>
+                {{cotation.cod_der}}
                 </td>
-                                <td>
-                  <b-form-input
-                    type="text"
-                    disabled
-                    v-model="newDescProd"
-                    id="new-product"
-                    placeholder=""
-                    style="text-align: center"
-                  ></b-form-input>
+                <td>
+                {{cotation.desc_der}}
                 </td>
-                                <td>
-                  <b-form-input
-                    type="text"
-                    disabled
-                    v-model="newDescProd"
-                    id="new-product"
-                    placeholder=""
-                    style="text-align: center"
-                  ></b-form-input>
+                <td>
+                {{cotation.colecao}}
                 </td>
-                                <td>
-                  <b-form-input
-                    type="text"
-                    disabled
-                    v-model="newDescProd"
-                    id="new-product"
-                    placeholder=""
-                    style="text-align: center"
-                  ></b-form-input>
+                <td>
+                {{cotation.um}}
                 </td>
                 <td>
                   <b-form-input
@@ -153,7 +111,7 @@
                     style="text-align: center"
                   ></b-form-input>
                 </td>
-                                <td>
+                <td>
                   <b-form-input
                     type="text"
                     disabled
@@ -192,6 +150,7 @@
                     style="text-align: center"
                   ></b-form-input>
                 </td>
+                </tr>
               </tbody>
             </table>
           </b-col>
@@ -199,10 +158,10 @@
         <b-row>
           <b-col md="16" sm="12">
             <br />
-            <b-button type="submit" variant="success"
-              >Gravar Cotação</b-button
+            <b-button @click="created()" variant="success"
+              >Responder Cotação</b-button
             ><br /><br />
-            Comprador - Indústria Compradora - Emissão: 14/06/2022
+            Emissão: {{ cotations[0].created_at }}
           </b-col>
         </b-row>
       </b-form>
@@ -211,7 +170,19 @@
 </template>
 
 <script>
+import axios from "axios";
 export default {
+  created() {
+    axios
+      .get("https://apiproducts-sscot.herokuapp.com/cotation/" + this.$route.params.user_id + "/" + this.$route.params.cot_number + "/" + this.$route.params.sup_id)
+      .then((res) => {
+        this.cotations = res.data;
+        console.log(this.cotations);
+      })
+      .catch((err) => {
+        console.log(err.response);
+      });
+  },
   data() {
     return {
       cotations: [],
