@@ -32,9 +32,7 @@
                   <th scope="col">U.M.</th>
                   <th scope="col">Preço Bruto</th>
                   <th scope="col">% ICMS</th>
-                  <th scope="col">% PIS</th>
-                  <th scope="col">% COFINS</th>
-                  <th scope="col">% IPI</th>
+                  <th scope="col">% PIS + COFINS</th>               
                   <th scope="col">Preço Líquido</th>
                   <th scope="col">Inicio Validade</th>
                   <th scope="col">Fim Validade</th>
@@ -42,8 +40,8 @@
                 </tr>
               </thead>
               <tbody>
-                <tr v-for="cotation in cotations" :key="cotation.id" class="table-light">
-                <td>
+                <tr v-for="cotation in cotations" :key="cotation.id" class="table-light" style="text-align: center; vertical-align: middle;">
+                <td >
                 {{cotation.cod_prod}}
                 </td>
                 <td>
@@ -65,6 +63,46 @@
                   <b-form-input
                     type="text"
                     required
+                    v-model="preco_bruto[cotation.id]"
+                    placeholder=""
+                    style="text-align: center"
+                  ></b-form-input>
+                </td>
+                <td>
+                  <b-form-input
+                    type="text"
+                    required
+                    v-model="icms"
+                    placeholder=""
+                    style="text-align: center"
+                  ></b-form-input>
+                </td>
+                <td>
+                  <b-form-input
+                    type="text"
+                    required
+                    v-model="piscofins"
+                    placeholder=""
+                    style="text-align: center"
+                  ></b-form-input>
+                </td>
+                <td>
+                R$ {{preco_liquido[cotation.id]}}
+                </td>
+                <td>
+                  <b-form-input
+                    type="text"
+                    required
+                    v-model="newDescProd"
+                    id="new-product"
+                    placeholder=""
+                    style="text-align: center"
+                  ></b-form-input>
+                </td>
+                <td>
+                  <b-form-input
+                    type="text"
+                    
                     v-model="newDescProd"
                     id="new-product"
                     placeholder=""
@@ -81,75 +119,7 @@
                     style="text-align: center"
                   ></b-form-input>
                 </td>
-                <td>
-                  <b-form-input
-                    type="text"
-                    required
-                    v-model="newDescProd"
-                    id="new-product"
-                    placeholder=""
-                    style="text-align: center"
-                  ></b-form-input>
-                </td>
-                <td>
-                  <b-form-input
-                    type="text"
-                    required
-                    v-model="newDescProd"
-                    id="new-product"
-                    placeholder=""
-                    style="text-align: center"
-                  ></b-form-input>
-                </td>
-                <td>
-                  <b-form-input
-                    type="text"
-                    required
-                    v-model="newDescProd"
-                    id="new-product"
-                    placeholder=""
-                    style="text-align: center"
-                  ></b-form-input>
-                </td>
-                <td>
-                  <b-form-input
-                    type="text"
-                    disabled
-                    v-model="newDescProd"
-                    id="new-product"
-                    placeholder=""
-                    style="text-align: center"
-                  ></b-form-input>
-                </td>
-                <td>
-                  <b-form-input
-                    type="text"
-                    required
-                    v-model="newDescProd"
-                    id="new-product"
-                    placeholder=""
-                    style="text-align: center"
-                  ></b-form-input>
-                </td>
-                <td>
-                  <b-form-input
-                    type="text"
-                    required
-                    v-model="newDescProd"
-                    id="new-product"
-                    placeholder=""
-                    style="text-align: center"
-                  ></b-form-input>
-                </td>
-                <td>
-                  <b-form-input
-                    type="text"
-                    v-model="newDescProd"
-                    id="new-product"
-                    placeholder=""
-                    style="text-align: center"
-                  ></b-form-input>
-                </td>
+            
                 </tr>
               </tbody>
             </table>
@@ -172,6 +142,12 @@
 <script>
 import axios from "axios";
 export default {
+  watch: {
+    preco_bruto(){
+      this.preco_liquido[684] = this.preco_bruto[684] * ((100 - 12 - 9.25)/100)
+      this.preco_liquido[684] = Math.round(this.preco_liquido[684], -2)
+    }
+  },
   created() {
     axios
       .get("https://apiproducts-sscot.herokuapp.com/cotation/" + this.$route.params.user_id + "/" + this.$route.params.cot_number + "/" + this.$route.params.sup_id)
@@ -187,6 +163,8 @@ export default {
     return {
       cotations: [],
       id: localStorage.getItem("id"),
+      preco_bruto: [],
+      preco_liquido: [],
     };
   },
 };
