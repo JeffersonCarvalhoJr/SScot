@@ -11,9 +11,10 @@
           v-model="name"
         ></b-form-input>
         <br>
-        <h5 class="text">Editar E-mail</h5>
+        <h5 class="text">E-mail</h5>
         <b-form-input
           type="email"
+          disabled
           placeholder="email@email.com"
           class="input"
           v-model="email"
@@ -67,7 +68,8 @@ export default {
           Authorization: "Bearer " + localStorage.getItem("token"),
         },
       };
-
+// http://localhost:5000/
+// https://apiuserssscot.herokuapp.com/admin
       axios
         .put(
           "https://apiuserssscot.herokuapp.com/admin",

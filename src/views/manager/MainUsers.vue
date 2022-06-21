@@ -82,7 +82,7 @@
                   class="changerole"
                   variant="primary"
                   @click="changeRoleUser()"
-                  >Usuário</b-button
+                  >Representante</b-button
                 >
                 |
                 <b-button

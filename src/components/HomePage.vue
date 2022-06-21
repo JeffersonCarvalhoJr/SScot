@@ -78,6 +78,10 @@ footer{
   color:white;
   font-family: Helvetica;
 }
+h2{
+    color: var(--color-text-dark);
+
+}
 
 </style>
 

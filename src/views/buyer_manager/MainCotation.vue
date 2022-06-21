@@ -254,7 +254,7 @@ export default {
         .then((res) => {
           console.log(res);
           alert("Cotação Gerada!")
-       //   this.$router.push({ name: "HomeModules" });
+          this.$router.push({ name: "HomeModules" });
         })
         .catch((err) => {
           var msgErro = err.response.data.err;

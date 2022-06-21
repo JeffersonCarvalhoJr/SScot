@@ -18,7 +18,7 @@
         <br />
       </b-row>
 
-      <b-form>
+      <b-form @submit="applyCotation">
         <b-row>
           <b-col>
             <table class="table table-bordered">
@@ -29,97 +29,114 @@
                   <th scope="col">Código Derivação</th>
                   <th scope="col">Descrição Derivação</th>
                   <th scope="col">Coleção</th>
+                  <th scope="col">Qtd</th>
                   <th scope="col">U.M.</th>
                   <th scope="col">Preço Bruto</th>
                   <th scope="col">% ICMS</th>
-                  <th scope="col">% PIS + COFINS</th>               
-                  <th scope="col">Preço Líquido</th>
+                  <th scope="col">% PIS</th>
+                  <th scope="col">% COFINS</th>
                   <th scope="col">Inicio Validade</th>
                   <th scope="col">Fim Validade</th>
                   <th scope="col">Observação</th>
                 </tr>
               </thead>
               <tbody>
-                <tr v-for="cotation in cotations" :key="cotation.id" class="table-light" style="text-align: center; vertical-align: middle;">
-                <td >
-                {{cotation.cod_prod}}
-                </td>
-                <td>
-                {{cotation.desc_prod}}
-                </td>
-                <td>
-                {{cotation.cod_der}}
-                </td>
-                <td>
-                {{cotation.desc_der}}
-                </td>
-                <td>
-                {{cotation.colecao}}
-                </td>
-                <td>
-                {{cotation.um}}
-                </td>
-                <td>
-                  <b-form-input
-                    type="text"
-                    required
-                    v-model="preco_bruto[cotation.id]"
-                    placeholder=""
-                    style="text-align: center"
-                  ></b-form-input>
-                </td>
-                <td>
-                  <b-form-input
-                    type="text"
-                    required
-                    v-model="icms"
-                    placeholder=""
-                    style="text-align: center"
-                  ></b-form-input>
-                </td>
-                <td>
-                  <b-form-input
-                    type="text"
-                    required
-                    v-model="piscofins"
-                    placeholder=""
-                    style="text-align: center"
-                  ></b-form-input>
-                </td>
-                <td>
-                R$ {{preco_liquido[cotation.id]}}
-                </td>
-                <td>
-                  <b-form-input
-                    type="text"
-                    required
-                    v-model="newDescProd"
-                    id="new-product"
-                    placeholder=""
-                    style="text-align: center"
-                  ></b-form-input>
-                </td>
-                <td>
-                  <b-form-input
-                    type="text"
-                    
-                    v-model="newDescProd"
-                    id="new-product"
-                    placeholder=""
-                    style="text-align: center"
-                  ></b-form-input>
-                </td>
-                <td>
-                  <b-form-input
-                    type="text"
-                    required
-                    v-model="newDescProd"
-                    id="new-product"
-                    placeholder=""
-                    style="text-align: center"
-                  ></b-form-input>
-                </td>
-            
+                <tr
+                  v-for="cotation in cotations"
+                  :key="cotation.id"
+                  class="table-light"
+                  style="text-align: center; vertical-align: middle"
+                >
+                  <td>
+                    {{ cotation.cod_prod }}
+                  </td>
+                  <td>
+                    {{ cotation.desc_prod }}
+                  </td>
+                  <td>
+                    {{ cotation.cod_der }}
+                  </td>
+                  <td>
+                    {{ cotation.desc_der }}
+                  </td>
+                  <td>
+                    {{ cotation.colecao }}
+                  </td>
+                  <td>
+                    {{ cotation.qtd }}
+                  </td>
+                  <td>
+                    {{ cotation.um }}
+                  </td>
+                  <td>
+                    <b-form-input
+                      type="number"
+                      min="0"
+                      required
+                      v-model="cotation.preco_bruto"
+                      placeholder=""
+                      style="text-align: center"
+                    ></b-form-input>
+                  </td>
+                  <td>
+                    <b-form-input
+                      type="number"
+                      min="0"
+                      required
+                      v-model="cotation.icms"
+                      placeholder=""
+                      style="text-align: center"
+                    ></b-form-input>
+                  </td>
+                  <td>
+                    <b-form-input
+                      type="number"
+                      min="0"
+                      required
+                      v-model="cotation.pis"
+                      placeholder=""
+                      style="text-align: center"
+                    ></b-form-input>
+                  </td>
+                  <td>
+                    <b-form-input
+                      type="number"
+                      min="0"
+                      required
+                      v-model="cotation.cofins"
+                      placeholder=""
+                      style="text-align: center"
+                    ></b-form-input>
+                  </td>
+                  <td>
+                    <b-form-input
+                      type="date"
+                      required
+                      v-model="cotation.inicioValidade"
+                      id="new-product"
+                      placeholder=""
+                      style="text-align: center"
+                    ></b-form-input>
+                  </td>
+                  <td>
+                    <b-form-input
+                      type="date"
+                      v-model="cotation.fimValidade"
+                      id="new-product"
+                      placeholder=""
+                      style="text-align: center"
+                    ></b-form-input>
+                  </td>
+                  <td>
+                    <b-form-input
+                      type="text"
+                      required
+                      v-model="cotation.observacao"
+                      id="new-product"
+                      placeholder=""
+                      style="text-align: center"
+                    ></b-form-input>
+                  </td>
                 </tr>
               </tbody>
             </table>
@@ -128,7 +145,7 @@
         <b-row>
           <b-col md="16" sm="12">
             <br />
-            <b-button @click="created()" variant="success"
+            <b-button  type="submit" variant="success"
               >Responder Cotação</b-button
             ><br /><br />
             Emissão: {{ cotations[0].created_at }}
@@ -142,15 +159,35 @@
 <script>
 import axios from "axios";
 export default {
-  watch: {
-    preco_bruto(){
-      this.preco_liquido[684] = this.preco_bruto[684] * ((100 - 12 - 9.25)/100)
-      this.preco_liquido[684] = Math.round(this.preco_liquido[684], -2)
+  methods: {
+    applyCotation() {
+      // https://apiproducts-sscot.herokuapp.com/cotation/apply
+      // http://localhost:5000/cotation/apply
+      axios
+        .post("http://localhost:5000/cotation/apply", {
+          cotations: this.cotations
+        })
+        .then((res) => {
+          console.log(res);
+          alert("Cotação Respondida!");
+          //   this.$router.push({ name: "HomeModulesSup" });
+        })
+        .catch((err) => {
+          var msgErro = err.response.data.err;
+          this.error = msgErro;
+        });
     }
   },
   created() {
     axios
-      .get("https://apiproducts-sscot.herokuapp.com/cotation/" + this.$route.params.user_id + "/" + this.$route.params.cot_number + "/" + this.$route.params.sup_id)
+      .get(
+        "https://apiproducts-sscot.herokuapp.com/cotation/" +
+          this.$route.params.user_id +
+          "/" +
+          this.$route.params.cot_number +
+          "/" +
+          this.$route.params.sup_id
+      )
       .then((res) => {
         this.cotations = res.data;
         console.log(this.cotations);
@@ -161,12 +198,12 @@ export default {
   },
   data() {
     return {
-      cotations: [],
       id: localStorage.getItem("id"),
-      preco_bruto: [],
-      preco_liquido: [],
+      cotations: []
     };
   },
+  
+  
 };
 </script>
 
