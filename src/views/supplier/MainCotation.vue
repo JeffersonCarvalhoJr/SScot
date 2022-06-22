@@ -130,7 +130,6 @@
                   <td>
                     <b-form-input
                       type="text"
-                      required
                       v-model="cotation.observacao"
                       id="new-product"
                       placeholder=""
@@ -164,13 +163,13 @@ export default {
       // https://apiproducts-sscot.herokuapp.com/cotation/apply
       // http://localhost:5000/cotation/apply
       axios
-        .post("http://localhost:5000/cotation/apply", {
+        .post("https://apiproducts-sscot.herokuapp.com/cotation/apply", {
           cotations: this.cotations
         })
         .then((res) => {
           console.log(res);
           alert("Cotação Respondida!");
-          //   this.$router.push({ name: "HomeModulesSup" });
+             this.$router.push({ name: "ListCotation" });
         })
         .catch((err) => {
           var msgErro = err.response.data.err;
