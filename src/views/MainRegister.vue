@@ -6,7 +6,7 @@
         <div class="col-12 col-md-9 col-lg-7 col-xl-6">
           <div class="card" style="border-radius: 15px;">
             <div class="card-body p-5">
-              <h2 class="text">Sistema de Cotações - SSCOT</h2>
+              <h3 class="text">Sistema de Cotações - SSCOT</h3>
               <hr>
               <h3 class="text">Crie sua conta</h3>                     
 

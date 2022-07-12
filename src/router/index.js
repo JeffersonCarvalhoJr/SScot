@@ -16,6 +16,7 @@ import Products from '../views/buyer_manager/MainProducts.vue'
 import Cotation from '../views/buyer_manager/MainCotation.vue'
 import CotationSup from '../views/supplier/MainCotation.vue'
 import ListCotation from '../views/supplier/ListCotation.vue'
+import ListCotationBuyer from '../views/buyer_manager/ListCotation.vue'
 
 
 
@@ -126,6 +127,12 @@ const routes = [{
         path: '/listcotation',
         name: 'ListCotation',
         component: ListCotation,
+    },
+
+    {
+        path: '/listcotationbuyer',
+        name: 'ListCotationBuyer',
+        component: ListCotationBuyer,
     },
 
 ]
