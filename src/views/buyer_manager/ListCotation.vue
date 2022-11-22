@@ -30,7 +30,7 @@
                   :to="{ name: 'MainCotationSup', params: { user_id: cotation.user_id, cot_number: cotation.cot_number, sup_id: cotation.sup_id  } }"
                 >
                   <button style="margin-right: 10px" class="btn btn-success">
-                    Responder
+                    Ver
                   </button></router-link
                 >
               </td>
@@ -57,7 +57,7 @@ export default {
   // https://apiproducts-sscot.herokuapp.com/cotation/
   created() {
     axios
-      .get("https://apiproducts-sscot.herokuapp.com/cotation/" + this.id)
+      .get("https://apiproducts-sscot.herokuapp.com/cotation/")
       .then((res) => {
         console.log(res);
         console.log(this.cotations);
