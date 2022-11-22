@@ -39,7 +39,7 @@
                   class="text-center"
                   style="width: 30rem"
                 >
-                  <a href="/listcotation" class="btn btn-primary stretched-link">Acesse</a>
+                  <a href="/listcotationbuyer" class="btn btn-primary stretched-link">Acesse</a>
                 </b-card>
                 <br />
               </b-card-group>
